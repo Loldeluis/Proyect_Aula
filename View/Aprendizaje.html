@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Aprende Programación</title>
+    <link rel="stylesheet" href="../CSS/aprendizaje.css">
+</head>
+<body>
+    <header>Bienvenido a Aprende Programación</header>
+    <div class="container">
+        <h2>Selecciona un lenguaje de programación</h2>
+        <div class="grid" id="languages-container"></div>
+        <button class="btn-back" onclick="window.location.href='Principal.html'">← Volver</button>
+        Bienvenido al Panel de Aprendizaje
+    </div>
+
+    <script>
+        const languages = [
+            { name: "Python", color: "#3776AB" },
+            { name: "JavaScript", color: "#F7DF1E" },
+            { name: "Java", color: "#F89820" },
+            { name: "C++", color: "#00599C" }
+        ];
+
+        const container = document.getElementById("languages-container");
+
+        languages.forEach(lang => {
+            const langBox = document.createElement("div");
+            langBox.className = "language-box";
+            langBox.style.borderLeft = `5px solid ${lang.color}`;
+            langBox.innerHTML = `
+                <h3>${lang.name}</h3>
+                <p>Selecciona un nivel para comenzar.</p>
+                <div class="levels" id="levels-${lang.name}">
+                    <button class="btn" onclick="startLevel('${lang.name}', 1)">Nivel 1</button>
+                    <button class="btn" onclick="startLevel('${lang.name}', 2)">Nivel 2</button>
+                    <button class="btn" onclick="startLevel('${lang.name}', 3)">Nivel 3</button>
+                </div>
+            `;
+            langBox.onclick = () => {
+                document.querySelectorAll('.levels').forEach(level => level.style.display = 'none');
+                document.getElementById(`levels-${lang.name}`).style.display = 'block';
+            };
+            container.appendChild(langBox);
+        });
+
+        function startLevel(language, level) {
+            alert(`Iniciando ${language} - Nivel ${level}`);
+        }
+
+        function goBack() {
+        window.location.href = "index.html"; 
+    }
+
+    </script>
+</body>
+</html>

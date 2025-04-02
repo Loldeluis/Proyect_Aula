@@ -1,0 +1,156 @@
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e3f2fd;
+    color: #333;
+  }
+  header {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+  .login-btn {
+    background-color: white;
+    color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 20px;
+    transition: 0.3s;
+  }
+  .login-btn:hover {
+    background-color: #ffeb3b;
+    color: #0056b3;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #0056b3;
+    padding: 0.7rem;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: #ffeb3b;
+  }
+  .container {
+    padding: 20px;
+    text-align: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+  .language-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  .language-box:hover {
+    transform: scale(1.05);
+  }
+  .btn {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .btn:hover {
+    background: #0056b3;
+  }
+
+  .modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  }
+  .modal input {
+    width: 90%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 10px; 
+    margin-right: 20px;
+  }
+
+  .register-btn {
+    background-color: white;
+    color: #007bff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .register-btn:hover {
+    background-color: #ffeb3b;
+    color: #0056b3;
+  }
+
+  .modal .btn {
+    width: 100%;
+  }
+  .close {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+  }
+  .small-text {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .small-text a {
+    color: #007bff;
+    cursor: pointer;
+  }
