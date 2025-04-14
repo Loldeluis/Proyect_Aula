@@ -70,3 +70,11 @@ color: #0056b3;
 .btn:hover {
     background: #0056b3;
 }
+.modal {
+    display: none; /* Esto es crucial */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro transparente */
+    z-index: 1000;
+}

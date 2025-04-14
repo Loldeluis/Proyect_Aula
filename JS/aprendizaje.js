@@ -6,7 +6,6 @@ const languages = [
 ];
 
 const container = document.getElementById("languages-container");
-
 languages.forEach(lang => {
     const langBox = document.createElement("div");
     langBox.className = "language-box";
@@ -32,5 +31,5 @@ function startLevel(language, level) {
 }
 
 function goBack() {
-window.location.href = "index.html"; 
+    window.location.href = "index.html"; 
 }

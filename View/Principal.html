@@ -10,12 +10,8 @@
     <header>
       <div class="logo">Aprende Programación</div>
       <div class="auth-buttons">
-        <button class="login-btn" onclick="openModal('loginModal')">
-          Iniciar Sesión
-        </button>
-        <button class="register-btn" onclick="openModal('registerModal')">
-          Registrarme
-        </button>
+        <a href="login.html" class="login-btn">Iniciar sesión</a>
+        <a href="formularioinsertar.html" class="register-btn">Registrarse</a>
       </div>
     </header>
 
@@ -81,35 +77,9 @@
       </div>
     </div>
 
-    <!-- MODAL DE INICIO DE SESIÓN -->
-    <div id="loginModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('loginModal')">&times;</span>
-        <h3>Iniciar Sesión</h3>
-        <input type="text" placeholder="Usuario" />
-        <input type="password" placeholder="Contraseña" />
-        <button class="btn">Ingresar</button>
-        <p class="small-text">
-          ¿No tienes cuenta?
-          <a onclick="openModal('registerModal')">Registrarme</a>
-        </p>
-      </div>
-    </div>
 
-    <!-- MODAL DE REGISTRO -->
-    <div id="registerModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('registerModal')">&times;</span>
-        <h3>Registrarse</h3>
-        <input type="text" placeholder="Nombre" />
-        <input type="email" placeholder="Correo" />
-        <input type="password" placeholder="Contraseña" />
-        <button class="btn">Registrarme</button>
-      </div>
-    </div>
-
-    <!-- MODAL DE CONTACTO -->
-    <div id="contactModal" class="modal">
+    <!-- MODAL DE CONTACTO
+     <div id="contactModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModal('contactModal')">&times;</span>
         <h3>Contacto</h3>
@@ -118,7 +88,8 @@
           <img src="../Media/unnamed.png" alt="WhatsApp" width="40" />
         </a>
       </div>
-    </div>
+    </div> -->
+    
 
     <script>
       const languages = [
@@ -182,9 +153,7 @@
       }
 
       document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("loginModal").style.display = "none";
-        document.getElementById("registerModal").style.display = "none";
-        document.getElementById("contactModal").style.display = "none";
+        document.getElementById("contactModal").style.display = "flex";
       });
     </script>
   </body>
