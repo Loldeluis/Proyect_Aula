@@ -5,156 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aprende Programación</title>
     <link rel="stylesheet" href="../CSS/principal.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
   </head>
   <body>
     <header>
-      <div class="logo">Aprende Programación</div>
-      <div class="auth-buttons">
-        <a href="login.html" class="login-btn">Iniciar sesión</a>
-        <a href="formularioinsertar.html" class="register-btn">Registrarse</a>
+      <div class="logo">
+          <i class="fas fa-code"></i>
+          <span>Aprende Programación</span>
       </div>
-    </header>
+      <div class="auth-buttons">
+          <a href="login.html" class="auth-btn login-btn">
+              <i class="fas fa-sign-in-alt"></i>
+              <span>Iniciar sesión</span>
+          </a>
+          <a href="formularioinsertar.html" class="auth-btn register-btn">
+              <i class="fas fa-user-plus"></i>
+              <span>Registrarse</span>
+          </a>
+      </div>
+  </header>
 
-    <nav>
-      <a href="#" onclick="showSection('inicio')">Inicio</a>
-      <a href="#" onclick="showSection('lenguajes')">Lenguajes</a>
-      <a href="#" onclick="showSection('recursos')">Recursos</a>
-      <a href="#" onclick="openModal('contactModal')">Contacto</a>
-    </nav>
+  <nav>
+      <a href="#" onclick="showSection('inicio')">
+          <i class="fas fa-home"></i>
+          <span>Inicio</span>
+      </a>
+      <a href="#" onclick="showSection('lenguajes')">
+          <i class="fas fa-laptop-code"></i>
+          <span>Lenguajes</span>
+      </a>
+      <a href="#" onclick="showSection('recursos')">
+          <i class="fas fa-book"></i>
+          <span>Recursos</span>
+      </a>
+      <a href="#" onclick="openModal('contactModal')">
+          <i class="fas fa-envelope"></i>
+          <span>Contacto</span>
+      </a>
+  </nav>
 
-    <!-- Sección de Inicio -->
-    <div id="inicio" class="container">
-      <h1>Bienvenido a Aprende Programación</h1>
-      <p>
-        Explora los lenguajes de programación y adquiere nuevas habilidades.
-      </p>
-      <img
-        src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
-        alt="Imagen de programación"
-        style="width: 20%; border-radius: 8px"
-      />
-      <br />
-      <button class="btn" onclick="window.location.href='Aprendizaje.html'">
-        Comenzar
-      </button>
-    </div>
+  <!-- Sección de Inicio -->
+  <div id="inicio" class="container">
+      <div class="hero">
+          <h1>Domina el Arte de la Programación</h1>
+          <p>Sumérgete en el mundo del desarrollo de software y adquiere las habilidades más demandadas de la industria tecnológica.</p>
+          <img
+              src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
+              alt="Lenguajes de programación"
+              class="hero-img"
+          />
+          <br />
+          <a href="Aprendizaje.html" class="btn">
+              <i class="fas fa-rocket"></i>
+              <span>Comenzar ahora</span>
+          </a>
+      </div>
+  </div>
 
-    <div id="recursos" class="container" style="display: none">
-      <h2>Recursos para Aprender Programación</h2>
-      <p>Aquí encontrarás materiales útiles para mejorar tus habilidades.</p>
+  <div id="recursos" class="container" style="display: none">
+      <div class="section-title">
+          <h2>Recursos de Aprendizaje</h2>
+      </div>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto 2rem;">Descubre las mejores herramientas y plataformas para acelerar tu aprendizaje en programación.</p>
 
       <div class="grid">
-        <div class="language-box">
-          <h3>Documentación Oficial</h3>
-          <p>Consulta las fuentes oficiales de cada lenguaje.</p>
-          <a
-            href="https://developer.mozilla.org/es/"
-            class="btn"
-            target="_blank"
-            >MDN Docs</a
-          >
-        </div>
-        <div class="language-box">
-          <h3>Plataformas de Cursos</h3>
-          <p>Aprende de forma estructurada con cursos interactivos.</p>
-          <a href="https://www.freecodecamp.org/" class="btn" target="_blank"
-            >FreeCodeCamp</a
-          >
-        </div>
-        <div class="language-box">
-          <h3>Compiladores Online</h3>
-          <p>Ejecuta código directamente desde tu navegador.</p>
-          <a href="https://replit.com/" class="btn" target="_blank">Replit</a>
-        </div>
+          <div class="card">
+              <i class="fas fa-file-alt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h3>Documentación Oficial</h3>
+              <p>Accede a las fuentes más confiables y actualizadas de cada tecnología.</p>
+              <a
+                  href="https://developer.mozilla.org/es/"
+                  class="btn btn-outline"
+                  target="_blank"
+              >
+                  <i class="fab fa-firefox"></i>
+                  <span>MDN Web Docs</span>
+              </a>
+          </div>
+          <div class="card">
+              <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h3>Cursos Interactivos</h3>
+              <p>Aprende con proyectos prácticos y ejercicios en tiempo real.</p>
+              <a href="https://www.freecodecamp.org/" class="btn btn-outline" target="_blank">
+                  <i class="fab fa-free-code-camp"></i>
+                  <span>FreeCodeCamp</span>
+              </a>
+          </div>
+          <div class="card">
+              <i class="fas fa-code" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+              <h3>Entornos de Práctica</h3>
+              <p>Ejecuta código directamente desde tu navegador sin configuraciones complejas.</p>
+              <a href="https://replit.com/" class="btn btn-outline" target="_blank">
+                  <i class="fas fa-terminal"></i>
+                  <span>Replit</span>
+              </a>
+          </div>
       </div>
-    </div>
+  </div>
 
-    <div id="lenguajes" class="container" style="display: none">
-      <h2>Descubre los Lenguajes de Programación</h2>
-      <p>Haz clic en un lenguaje para aprender más sobre él.</p>
+  <div id="lenguajes" class="container" style="display: none">
+      <div class="section-title">
+          <h2>Lenguajes de Programación</h2>
+      </div>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto 2rem;">Explora los lenguajes más populares y encuentra el ideal para tus objetivos.</p>
       <div class="grid" id="languages-container">
-        <!-- Los lenguajes se cargarán aquí dinámicamente -->
+          <!-- Los lenguajes se cargarán aquí dinámicamente -->
       </div>
-    </div>
+  </div>
 
-
-    <!-- MODAL DE CONTACTO
-     <div id="contactModal" class="modal">
+  <!-- Modal de Contacto -->
+  <div id="contactModal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="closeModal('contactModal')">&times;</span>
-        <h3>Contacto</h3>
-        <p><strong>Teléfono:</strong> +57 300 123 4567</p>
-        <a href="https://wa.me/573001234567" target="_blank">
-          <img src="../Media/unnamed.png" alt="WhatsApp" width="40" />
-        </a>
+          <span class="close" onclick="closeModal('contactModal')">&times;</span>
+          <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Contáctanos</h3>
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+              <i class="fas fa-phone-alt" style="color: var(--accent); font-size: 1.5rem; margin-bottom: 1rem;"></i>
+              <p style="font-size: 1.2rem;"><strong>Teléfono:</strong> +57 300 123 4567</p>
+          </div>
+          <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+              <a href="https://wa.me/573001234567" target="_blank" class="btn" style="background-color: #25D366;">
+                  <i class="fab fa-whatsapp"></i>
+                  <span>WhatsApp</span>
+              </a>
+              <a href="mailto:contacto@aprendeprogramacion.com" class="btn" style="background-color: #EA4335;">
+                  <i class="fas fa-envelope"></i>
+                  <span>Email</span>
+              </a>
+          </div>
       </div>
-    </div> -->
-    
-
-    <script>
-      const languages = [
-        {
-          name: "Python",
-          description: "Ideal para inteligencia artificial y ciencia de datos.",
-          color: "#3776AB",
-          link: "https://www.python.org/",
-        },
-        {
-          name: "JavaScript",
-          description: "El alma del desarrollo web dinámico e interactivo.",
-          color: "#F7DF1E",
-          link: "https://developer.mozilla.org/es/docs/Web/JavaScript",
-        },
-        {
-          name: "Java",
-          description:
-            "Lenguaje versátil para aplicaciones empresariales y móviles.",
-          color: "#F89820",
-          link: "https://www.java.com/es/",
-        },
-        {
-          name: "C++",
-          description:
-            "Potente y rápido, usado en juegos y sistemas embebidos.",
-          color: "#00599C",
-          link: "https://cplusplus.com/",
-        },
-      ];
-
-      const container = document.getElementById("languages-container");
-
-      languages.forEach((lang) => {
-        const langBox = document.createElement("div");
-        langBox.className = "language-box";
-        langBox.style.borderLeft = `5px solid ${lang.color}`;
-        langBox.innerHTML = `
-            <h3>${lang.name}</h3>
-            <p>${lang.description}</p>
-            <a href="${lang.link}" class="btn" target="_blank">Explorar</a>
-        `;
-        container.appendChild(langBox);
-      });
-
-      function openModal(id) {
-        document.getElementById(id).style.display = "flex";
-      }
-
-      function closeModal(id) {
-        document.getElementById(id).style.display = "none";
-      }
-      function showSection(sectionId) {
-        // Oculta todas las secciones antes de mostrar la nueva
-        document
-          .querySelectorAll(".container")
-          .forEach((el) => (el.style.display = "none"));
-
-        // Muestra la sección seleccionada
-        document.getElementById(sectionId).style.display = "block";
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("contactModal").style.display = "flex";
-      });
-    </script>
+  </div>
+  
+  <footer>
+      <p>© 2023 Aprende Programación. Todos los derechos reservados.</p>
+      <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem;">
+          <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+          <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+          <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+          <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
+      </div>
+  </footer>
+  <script src="/JS/app.js" crossorigin="anonymous"></script>
   </body>
 </html>

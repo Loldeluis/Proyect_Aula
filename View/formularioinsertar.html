@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
     <link rel="stylesheet" href="../CSS/formulario.css"">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <a href="Principal.html" class="back-button">Inicio</a>
     <form action="informacion.php" method="post">
         <div class="form-group">
             <h3>Formulario para insertar</h3>
@@ -15,7 +17,7 @@
             <input type="text" id="nombre" name="nombre" required placeholder="Escriba nombre completo" maxlength="100"><br><br>
 
             <label for="cedula">Número de Documento:</label>
-            <input type="number" id="cedula" name="cedula" required placeholder="Escriba cedula" maxlength="11" pattern="[0-9]{11}"><br><br>
+            <input type="text" id="cedula" name="cedula" required placeholder="Escriba cedula" maxlength="11" pattern="[0-9]{11}"><br><br>
 
             <label for="rol">Rol:</label>
             <select id="rol" name="rol" required>
