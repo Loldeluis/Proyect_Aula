@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aprende Programación</title>
+    <link rel="stylesheet" href="../CSS/principal.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <i class="fas fa-code"></i>
+        <span>Aprende Programación</span>
+      </div>
+
+      <div class="auth-buttons" id="authButtons">
+        <!-- Este contenido se actualizará si el usuario ya está logueado -->
+      </div>
+    </header>
+
+    <nav>
+      <a href="#" onclick="showSection('inicio')">
+        <i class="fas fa-home"></i>
+        <span>Inicio</span>
+      </a>
+      <a href="#" onclick="showSection('lenguajes')">
+        <i class="fas fa-laptop-code"></i>
+        <span>Lenguajes</span>
+      </a>
+      <a href="#" onclick="showSection('recursos')">
+        <i class="fas fa-book"></i>
+        <span>Recursos</span>
+      </a>
+      <a href="#" onclick="openModal('contactModal')">
+        <i class="fas fa-envelope"></i>
+        <span>Contacto</span>
+      </a>
+    </nav>
+
+    <div id="inicio" class="container">
+      <div class="hero">
+        <h1>Domina el Arte de la Programación</h1>
+        <p>
+          Sumérgete en el mundo del desarrollo de software y adquiere las
+          habilidades más demandadas de la industria tecnológica.
+        </p>
+        <img
+          src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
+          alt="Lenguajes de programación"
+          class="hero-img"
+        />
+        <br />
+        <a href="Aprendizaje.html" class="btn">
+          <i class="fas fa-rocket"></i>
+          <span>Comenzar ahora</span>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2023 Aprende Programación. Todos los derechos reservados.</p>
+      <div
+        style="
+          margin-top: 1rem;
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+        "
+      >
+        <a href="#" style="color: white; font-size: 1.2rem"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="#" style="color: white; font-size: 1.2rem"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a href="#" style="color: white; font-size: 1.2rem"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="#" style="color: white; font-size: 1.2rem"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userEmail = urlParams.get("user_email");
+
+        if (userEmail) {
+          // Guardar el correo en localStorage si viene como parámetro
+          localStorage.setItem("userEmail", userEmail);
+        }
+
+        // Recuperar el correo almacenado en localStorage
+        const storedEmail = localStorage.getItem("userEmail");
+
+        // Si existe el correo almacenado, se actualiza el UI
+        if (storedEmail) {
+          const authButtons = document.getElementById("authButtons");
+          authButtons.innerHTML = `
+              <span class="auth-user">
+                  <i class="fas fa-user"></i> ${storedEmail}
+              </span>
+              <a href="cerrar_sesion.html" class="auth-btn logout-btn">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Cerrar sesión</span>
+              </a>
+          `;
+        } else {
+          // Si no hay sesión activa, muestra los botones de login y registro
+          const authButtons = document.getElementById("authButtons");
+          authButtons.innerHTML = `
+              <a href="login.html" class="auth-btn login-btn">
+                  <i class="fas fa-sign-in-alt"></i>
+                  <span>Iniciar sesión</span>
+              </a>
+              <a href="formularioinsertar.html" class="auth-btn register-btn">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Registrarse</span>
+              </a>
+          `;
+        }
+      };
+    </script>
+  </body>
+</html>
