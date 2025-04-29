@@ -139,3 +139,35 @@ input[type="submit"]:active {
         padding: 30px 20px;
     }
 }
+
+/* Estilo para el botón de regreso */
+.back-button {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    color: white;
+    padding: 0.7rem 1.3rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.back-button:hover {
+    background: linear-gradient(to right, var(--secondary), var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(67, 97, 238, 0.4);
+}
+
+.back-button i {
+    font-size: 1rem;
+}

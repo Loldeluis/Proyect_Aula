@@ -9,7 +9,7 @@
 </head>
 <body>
     <a href="Principal.html" class="back-button">Inicio</a>
-    <form action="informacion.php" method="post">
+    <form action="../PHP/informacion.php" method="post">
         <div class="form-group">
             <h3>Formulario para insertar</h3>
 
@@ -17,13 +17,19 @@
             <input type="text" id="nombre" name="nombre" required placeholder="Escriba nombre completo" maxlength="100"><br><br>
 
             <label for="cedula">Número de Documento:</label>
-            <input type="text" id="cedula" name="cedula" required placeholder="Escriba cedula" maxlength="11" pattern="[0-9]{11}"><br><br>
+            <input type="text" id="cedula" name="cedula" required placeholder="Escriba cédula" pattern="[0-9]{7,11}" maxlength="11"><br><br>
 
             <label for="rol">Rol:</label>
             <select id="rol" name="rol" required>
-            <option value="">Seleccione rol</option>
-            <option value="estudiante">Estudiante</option>
-            <option value="docente">Docente</option>
+                <option value="">Seleccione rol</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="docente">Docente</option>
+            </select><br><br>
+
+            <label for="institucion">Institución:</label>
+            <select id="institucion" name="institucion" required>
+                <option value="">Seleccione institución</option>
+                <?php include("../PHP/listar_instituciones.php"); ?>
             </select><br><br>
 
             <label for="email">Email:</label>
@@ -32,9 +38,11 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" required placeholder="Escriba contraseña" minlength="6"><br><br>
 
-            <input type="submit" value="Enviar">
+            <label for="confirm_password">Confirmar contraseña:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repita la contraseña" minlength="6"><br><br>
+
+            <input type="submit" value="Registrar">
         </div>
     </form>
-</body>
 
 </html>
