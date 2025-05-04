@@ -1,5 +1,5 @@
 <?php
-$connection_obj = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
+require_once 'conexion.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
