@@ -1,10 +1,31 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <title>Ejercicios Java</title>
+  <link rel="stylesheet" href="../CSS/ejercicios.css" />
 </head>
 <body>
-    
+  <header>
+    <h1>Lista de Ejercicios</h1>
+  </header>
+
+  <main id="contenedor-ejercicios" class="contenedor-ejercicios"></main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal oculto">
+    <div class="modal-contenido">
+      <span id="cerrarModal" class="cerrar">&times;</span>
+      <p id="descripcion-ejercicio"></p>
+      <form id="form-subida" action="../controller/upload.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="numero-ejercicio" name="numero_ejercicio" />
+        <label for="archivo">Sube tu archivo (.java):</label>
+        <input type="file" id="archivo" name="archivo" accept=".java" required />
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../JS/ejercicios.js"></script>
 </body>
 </html>
