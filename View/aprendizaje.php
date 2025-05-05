@@ -1,4 +1,12 @@
 
+<?php
+session_start();
+$usuario_id = $_SESSION['usuario_id'];
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'estudiante') {
+    header('Location: login.html');
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -11,8 +19,8 @@
 </head>
 <body>
     <header>
-        <i class="fas fa-laptop-code"></i>
-        <span>Bienvenido, <?= htmlspecialchars($usuario) ?> 👋</span>
+    <i class="fas fa-laptop-code"></i>
+    <span>Bienvenido estudiante: <?php echo $_SESSION['nombre_usuario']; ?></span>
     </header>
 
     <div class="container">
