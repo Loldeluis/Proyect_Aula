@@ -58,7 +58,7 @@ mysqli_close($conn);
             border-left: 8px solid #6f42c1;
             padding: 15px;
             margin-bottom: 15px;
-            background: #fdfdfd;
+            background:rgb(189, 13, 13);
             border-radius: 8px;
             box-shadow: 0 0 8px rgba(0,0,0,0.1);
         }

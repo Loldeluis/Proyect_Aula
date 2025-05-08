@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 
 if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'estudiante') {
@@ -38,6 +40,11 @@ $nombre_estudiante = $_SESSION['nombre_usuario'];
     </button>
 
     </div>
+    <div class="language-box" style="border-left: 8px solid #20c997;">
+    <h3>Inscribirse a Curso</h3>
+    <p>Explora cursos disponibles y únete para comenzar a aprender.</p>
+    <button class="btn" onclick="location.href='inscribirse_curso.php'">Ver Cursos</button>
+</div>
 
     <script>
         const languages = [
