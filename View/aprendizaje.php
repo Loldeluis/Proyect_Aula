@@ -1,11 +1,12 @@
-
 <?php
 session_start();
-$usuario_id = $_SESSION['usuario_id'];
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'estudiante') {
+
+if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'estudiante') {
     header('Location: login.html');
     exit();
 }
+
+$nombre_estudiante = $_SESSION['nombre_usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +29,14 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'estudiante') {
         <p class="welcome-message">Elige un lenguaje y nivel para comenzar tu aprendizaje</p>
         <div class="grid" id="languages-container"></div>
 
-        <button class="btn-back" onclick="window.location.href='Principal.html'">
+        <button class="btn-back" onclick="window.location.href='Principal.php'">
             <i class="fas fa-arrow-left"></i> Volver al inicio
         </button>
+
+        <button class="btn" onclick="window.location.href='ver_desafios.php'">
+        <i class="fas fa-tasks"></i> Ver Desafíos Asignados
+    </button>
+
     </div>
 
     <script>

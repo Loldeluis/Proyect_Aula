@@ -76,7 +76,7 @@ if (isset($_SESSION['nombre_usuario'])) {
               class="hero-img"
           />
           <br />
-          <a href="Aprendizaje.html" class="btn">
+          <a href="Aprendizaje.php" class="btn">
               <i class="fas fa-rocket"></i>
               <span>Comenzar ahora</span>
           </a>
