@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Ejecutar la consulta
         if (mysqli_stmt_execute($stmt)) {
             echo "Datos insertados correctamente";
+            header("Location: principal.php");
         } else {
             echo "Error al insertar los datos: " . mysqli_error($connection_obj);
         }
