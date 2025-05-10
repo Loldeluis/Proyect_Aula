@@ -42,16 +42,14 @@ $result = mysqli_stmt_get_result($stmt);
                 <th>Código</th>
                 <th>Nombre del Curso</th>
                 <th>Nivel</th>
-                <th>Acciones</th>
+               
             </tr>
             <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['codigo']); ?></td>
                     <td><?php echo htmlspecialchars($row['nombre']); ?></td>
                     <td><?php echo htmlspecialchars($row['nivel']); ?></td>
-                    <td>
-                        <a href="detalle_curso.php?id=<?php echo $row['id_curso']; ?>">Ver Detalles</a>
-                    </td>
+                   
                 </tr>
             <?php endwhile; ?>
         </table>
