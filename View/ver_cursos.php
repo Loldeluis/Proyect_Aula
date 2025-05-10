@@ -2,13 +2,13 @@
 session_start();
 
 // Verificación de sesión y rol
-if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
+if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'estudiante') {
     header('Location: login.html');
     exit();
 }
 
-$nombre_docente = $_SESSION['nombre_usuario'];
-$id_docente = $_SESSION['usuario_id']; // Este debe estar guardado en login
+$nombre_estudiante = $_SESSION['nombre_usuario'];
+$id_estudiante = $_SESSION['usuario_id']; // Este debe estar guardado en login
 
 // Conexión
 $conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
@@ -16,10 +16,14 @@ if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
 }
 
-// Consulta de cursos asignados al docente
-$sql = "SELECT id_curso, nombre, codigo, nivel FROM cursos WHERE id_docente = ?";
+// Consulta de calificaciones para el estudiante
+$sql = "SELECT e.calificacion, e.comentario
+        FROM entregas_desaios e
+        JOIN desafios d ON e.id_desafio = d.id_desafio
+        WHERE e.id_estudiante = ?";
+
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "i", $id_docente);
+mysqli_stmt_bind_param($stmt, "i", $id_estudiante);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 ?>

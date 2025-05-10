@@ -35,9 +35,7 @@ ORDER BY d.fecha_limite ASC
 
 
 $stmt = mysqli_prepare($conn, $sql);
-if (!$stmt) {
-    die("Error en la preparación de la consulta: " . mysqli_error($conn));
-}
+
 
 mysqli_stmt_bind_param($stmt, "ii", $id_estudiante, $id_estudiante);
 

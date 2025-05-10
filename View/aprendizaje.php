@@ -42,6 +42,8 @@ $nombre_estudiante = $_SESSION['nombre_usuario'];
     <h3>Inscribirse a Curso</h3>
     <p>Explora cursos disponibles y únete para comenzar a aprender.</p>
     <button class="btn" onclick="location.href='inscribirse_curso.php'">Ver Cursos</button>
+  <button class="btn" onclick="location.href='ver_calificaciones.php'">Ver Calificaciones</button>
+       
 </div>
 
     <script>
