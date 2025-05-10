@@ -11,39 +11,59 @@ $archivo = $_FILES['archivo'];
 $numeroEjercicio = intval($_POST['numero_ejercicio']);
 
 if ($archivo['error'] !== UPLOAD_ERR_OK) {
-    die("Error al subir el archivo.");
+    die("Error al subir el archivo. Código de error: " . $archivo['error']);
 }
 
-// Validar extensión
 $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
 if (strtolower($extension) !== 'java') {
     die("El archivo debe tener extensión .java");
 }
 
-// Validar que el JSON del ejercicio exista
-$jsonPath = __DIR__ . "../java-json/ejercicio_$numeroEjercicio.json";
-if (!file_exists($jsonPath)) {
-    die("No se encontró el archivo JSON del ejercicio.");
-}
-
-// Validar contenido del archivo .java
 $contenido = file_get_contents($archivo['tmp_name']);
 if (trim($contenido) === "") {
     die("El archivo .java está vacío.");
 }
 
-// Puedes agregar aquí más validaciones específicas si lo deseas
-// Por ejemplo: comprobar si contiene una clase, o una palabra clave
+// Ruta del JSON
+$jsonPath = __DIR__ . "/java-json/ejercicio_$numeroEjercicio.json";
+if (!file_exists($jsonPath)) {
+    die("No se encontró el archivo JSON del ejercicio.");
+}
+$data = json_decode(file_get_contents($jsonPath), true);
+$salidaEsperada = trim($data['salida_esperada'] ?? "");
 
-// Mover el archivo a una carpeta de entregas (ejemplo)
+// Crear carpeta de entregas
 $destino = __DIR__ . "/entregas/ejercicio_$numeroEjercicio/";
 if (!is_dir($destino)) {
     mkdir($destino, 0777, true);
 }
-$nombreFinal = $destino . basename($archivo['name']);
-if (move_uploaded_file($archivo['tmp_name'], $nombreFinal)) {
-    echo "Archivo recibido y validado correctamente.";
+
+$nombreBase = pathinfo($archivo['name'], PATHINFO_FILENAME);
+$rutaJava = $destino . $nombreBase . ".java";
+file_put_contents($rutaJava, $contenido);
+
+// Compilar
+$comandoCompilar = "javac " . escapeshellarg($rutaJava);
+exec($comandoCompilar, $outputCompilar, $codigoCompilacion);
+
+if ($codigoCompilacion !== 0) {
+    die("❌ Error al compilar el archivo.<br><pre>" . implode("\n", $outputCompilar) . "</pre>");
+}
+
+// Ejecutar (desde el mismo directorio)
+$comandoEjecutar = "java -cp " . escapeshellarg($destino) . " " . escapeshellarg($nombreBase);
+exec($comandoEjecutar, $outputEjecutar, $codigoEjecucion);
+
+if ($codigoEjecucion !== 0) {
+    die("❌ Error al ejecutar el archivo.<br><pre>" . implode("\n", $outputEjecutar) . "</pre>");
+}
+
+$salidaReal = trim(implode("\n", $outputEjecutar));
+
+// Comparar salida
+if ($salidaReal === $salidaEsperada) {
+    echo "✅ ¡Ejercicio $numeroEjercicio correcto!<br><strong>Salida:</strong><pre>$salidaReal</pre>";
 } else {
-    echo "No se pudo guardar el archivo.";
+    echo "❌ Resultado incorrecto.<br><strong>Tu salida:</strong><pre>$salidaReal</pre><strong>Esperado:</strong><pre>$salidaEsperada</pre>";
 }
 ?>
