@@ -49,7 +49,7 @@ $nombre_docente = $_SESSION['nombre_usuario'];
         <div class="language-box" style="border-left: 8px solid #17a2b8;">
             <h3><i class="fas fa-file-alt"></i> Reportes de Desempeño</h3>
             <p>Consulta y descarga el historial de desempeño.</p>
-            <button class="btn" onclick="location.href='reportes_desempeno.php'">Ver Reportes</button>
+            <button class="btn" onclick="location.href='reporte_desempeno.php'">Ver Reportes</button>
         </div>
 
         <div class="language-box" style="border-left: 8px solid #dc3545;">
