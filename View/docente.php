@@ -58,11 +58,7 @@ $nombre_docente = $_SESSION['nombre_usuario'];
             <button class="btn" onclick="location.href='asignar_desafios.php'">Asignar Desafíos</button>
         </div>
 
-        <div class="language-box" style="border-left: 8px solid #6f42c1;">
-            <h3><i class="fas fa-comment-dots"></i> Retroalimentación</h3>
-            <p>Agrega comentarios personalizados a los estudiantes.</p>
-            <button class="btn" onclick="location.href='comentarios.php'">Añadir Comentarios</button>
-        </div>
+       
     </div>
 
     <button class="btn-back" onclick="location.href='logout.php'">

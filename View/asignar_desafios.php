@@ -60,8 +60,12 @@ while ($row = mysqli_fetch_assoc($result)) {
             <input type="submit" value="Guardar desafío" class="btn">
         </form>
 
+        
         <button class="btn-back" onclick="location.href='docente.php'">
             <i class="fas fa-arrow-left"></i> Volver al panel
+        </button>
+            <button class="btn" onclick="location.href='ver_mis_desafios.php'">
+            <i class="fas fa-arrow-left"></i> Ver desafios
         </button>
     </div>
 </body>
