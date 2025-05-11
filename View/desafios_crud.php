@@ -31,14 +31,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['editar'])) {
 }
 
 // ELIMINAR DESAFÍO
-if ($accion === 'eliminar' && $id_desafio) {
-    $sql = "DELETE FROM desafios WHERE id_desafio = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $id_desafio);
-    mysqli_stmt_execute($stmt);
+if ($accion === 'eliminar' && is_numeric($id_desafio)) {
+    // Primero borra las entregas asociadas
+    $sql1 = "DELETE FROM entregas_desafios WHERE id_desafio = ?";
+    $stmt1 = mysqli_prepare($conn, $sql1);
+    mysqli_stmt_bind_param($stmt1, "i", $id_desafio);
+    mysqli_stmt_execute($stmt1);
+
+    // Luego borra el desafío
+    $sql2 = "DELETE FROM desafios WHERE id_desafio = ?";
+    $stmt2 = mysqli_prepare($conn, $sql2);
+    mysqli_stmt_bind_param($stmt2, "i", $id_desafio);
+    mysqli_stmt_execute($stmt2);
+
     header("Location: desafios_crud.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -14,13 +14,15 @@ if (!$conn) {
 // Obtener entregas de desafíos asignados por este docente
 $sql = "
 SELECT ed.id_entrega, u.nombre_usuario AS nombre_estudiante, d.titulo AS titulo_desafio, 
-       ed.contenido, ed.fecha_entrega, ed.calificacion, ed.retroalimentacion
+       ed.contenido, ed.fecha_entrega, ed.calificacion, ed.retroalimentacion, ed.archivo
 FROM entregas_desafios ed
 JOIN desafios d ON ed.id_desafio = d.id_desafio
 JOIN usuarios u ON ed.id_estudiante = u.id_usuario
 WHERE d.id_docente = ?
 ORDER BY ed.fecha_entrega DESC
 ";
+
+
 
 $stmt = mysqli_prepare($conn, $sql);
 if (!$stmt) {
@@ -70,7 +72,15 @@ mysqli_close($conn);
                 <textarea name="retroalimentacion" rows="3" required><?php echo htmlspecialchars($entrega['retroalimentacion'] ?? ''); ?></textarea>
 
                 <button type="submit" class="btn">Guardar Calificación</button>
+                 <?php if (!empty($entrega['archivo'])): ?>
+    <p><strong>Archivo adjunto:</strong>
+        <a href="descargar_archivo.php?nombre=<?php echo urlencode($entrega['archivo']); ?>" class="btn" target="_blank">Descargar</a>
+    </p>
+<?php endif; ?>
+
             </form>
+           
+
         <?php endforeach; ?>
     <?php endif; ?>
     <button class="btn-back" onclick="location.href='docente.php'">

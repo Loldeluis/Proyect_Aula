@@ -11,9 +11,25 @@ $contenido = isset($_POST['contenido']) ? $_POST['contenido'] : '';
 $archivoNombre = null;
 
 if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
+    $nombre_original = $_FILES['archivo']['name'];
     $archivoTmp = $_FILES['archivo']['tmp_name'];
-    $archivoNombre = basename($_FILES['archivo']['name']);
-    move_uploaded_file($archivoTmp, "../archivos/" . $archivoNombre);
+
+    // Crear nombre único para evitar sobrescrituras
+    $archivoNombre = uniqid() . "_" . basename($nombre_original);
+
+    // Asegurar que el directorio existe
+    $directorio = "../archivos_entregas/";
+    if (!is_dir($directorio)) {
+        mkdir($directorio, 0777, true);
+    }
+
+    $ruta_destino = $directorio . $archivoNombre;
+
+    // Mover el archivo
+    if (!move_uploaded_file($archivoTmp, $ruta_destino)) {
+        echo "Error al subir el archivo.";
+        exit();
+    }
 }
 
 $conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
