@@ -10,15 +10,15 @@
 <body>
     <a href="Principal.html" class="back-button">Inicio</a>
     <div id = "login"> 
-    <form action = "/PHP/datos.php" method="post">
+    <form action = "../Controller/usuarios/iniciar_sesion.php" method="post">
     <h2>LOGIN</h2>
     Email <input type = "text" name = "email" id ="email" required><br><br>
     Password<input type = "password" name = "password" id = "password" required><br><br> 
     <input type = "submit" value = "Ingresar">
     </center>
     </form>
-    <p class="small-text">¿No tienes cuenta? 
-        <a href="formularioinsertar.php">Regístrate aquí</a></p>
+    <p class="small-text">¿No tienes cuenta?</p>
+        <a href="../View/formulario_registro.php">Regístrate aquí</a></p>
     </div>
     
 </body>
