@@ -1,8 +1,9 @@
 <?php
-require_once '../Model/Conexion.php';
+$baseDir = dirname(dirname(__DIR__));
+require_once($baseDir . '/Model/entity/Conexion.php'); 
 
 try {
-    $conexion = Conexion::getConexion(); 
+    $conexion = Conexion::obtenerConexion(); 
 
     $sql = "SELECT id_institucion, nombre FROM instituciones WHERE estado = 1";
     $result = $conexion->query($sql);

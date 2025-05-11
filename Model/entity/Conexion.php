@@ -2,8 +2,6 @@
 class Conexion {
     private static $instancia = null;
     private $conexion;
-
-    // Hacemos el constructor privado para evitar instanciación directa
     private function __construct() {
         $host = "localhost"; 
         $user = "root"; 
@@ -21,26 +19,22 @@ class Conexion {
         mysqli_set_charset($this->conexion, 'utf8mb4');
     }
 
-    // Método estático para obtener la instancia única
-    public static function getConexion() {
+    // Método para obtener la instancia de la conexión
+    public static function obtenerConexion() {
         if (self::$instancia === null) {
-            self::$instancia = new self();
+            try {
+                self::$instancia = new self();
+            } catch (Exception $e) {
+                error_log("Error de conexión: " . $e->getMessage());
+                die("Lo sentimos, ocurrió un error al conectar con el sistema. Intenta nuevamente más tarde.");
+            }
         }
         return self::$instancia->conexion;
     }
-
-    // Método para cerrar la conexión
-    public static function cerrarConexion() {
-        if (self::$instancia !== null && self::$instancia->conexion !== null) {
-            mysqli_close(self::$instancia->conexion);
-            self::$instancia->conexion = null;
-            self::$instancia = null;
-        }
-    }
-
     // Evitamos la clonación del objeto
-    private function __clone() {}
+    public function __clone() {}
     
     // Evitamos la deserialización del objeto
-    private function __wakeup() {}
+    public function __wakeup() {}
 }
+?>
