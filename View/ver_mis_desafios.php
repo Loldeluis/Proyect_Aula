@@ -35,7 +35,8 @@ $result = mysqli_stmt_get_result($stmt);
         <h2>Mis Desafíos</h2>
 
         <?php if ($result && mysqli_num_rows($result) > 0): ?>
-           <table class="table-desafios">
+          <table class="table-desafios" style="border-spacing: 0 17px; border-collapse: separate;">
+
     <thead>
         <tr>
             <th>Título</th>

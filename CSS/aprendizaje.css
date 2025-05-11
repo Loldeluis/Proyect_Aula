@@ -155,3 +155,9 @@ header {
 .table-desafios td a.btn:hover {
     background-color: #45a049;
 }
+
+.table-desafios {
+    width: 100%;
+    border-collapse: separate; /* Permite espacio entre filas */
+    border-spacing: 0 20px; /* Espaciado vertical entre filas (12px) */
+}
