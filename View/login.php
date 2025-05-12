@@ -1,3 +1,20 @@
+<?php
+session_start();
+$mensajeExito = $_SESSION['mensaje_exito'] ?? '';
+unset($_SESSION['mensaje_exito']);
+?>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php if ($mensajeExito): ?>
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: <?= json_encode($mensajeExito) ?>,
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,20 +23,44 @@
     <title>login</title>
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
-    <a href="Principal.html" class="back-button">Inicio</a>
+    <a href="principal.php" class="back-button">
+  <i class="fas fa-arrow-left"></i>
+  <span>Volver</span>
+</a>
     <div id = "login"> 
     <form action = "../Controller/usuarios/iniciar_sesion.php" method="post">
     <h2>LOGIN</h2>
-    Email <input type = "text" name = "email" id ="email" required><br><br>
-    Password<input type = "password" name = "password" id = "password" required><br><br> 
-    <input type = "submit" value = "Ingresar">
-    </center>
+    <div class="input-group">
+        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+        <input type="text" name="email" id="email" required />
+        </div>
+
+        <div class="input-group">
+        <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+        <input type="password" name="password" id="password" required />
+        </div>
+
+        <input type="submit" value="Ingresar">
     </form>
+
     <p class="small-text">¿No tienes cuenta?</p>
         <a href="../View/formulario_registro.php">Regístrate aquí</a></p>
     </div>
-    
+    <?php if (!empty($_SESSION['error_login'])): ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al iniciar sesión',
+            text: '<?= $_SESSION['error_login'] ?>'
+        });
+    </script>
+    <?php unset($_SESSION['error_login']); ?>
+<?php endif; ?>
+<?php unset($_SESSION['form_login']); ?>
 </body>
 </html>

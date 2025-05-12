@@ -18,13 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ) {
             throw new Exception("Todos los campos son obligatorios.");
         }
-
+        $claveHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
         // Crear objeto Usuario 
-        $usuario = new Usuario(
-            $_POST['nombre'],
+        $usuario = new Usuario($_POST['nombre'],
             $_POST['cedula'],
             $_POST['email'],
-            $_POST['password'],
+            $claveHash,
             $_POST['rol'],
             $_POST['institucion']
         );

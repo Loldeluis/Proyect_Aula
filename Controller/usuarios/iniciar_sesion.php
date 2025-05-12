@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['usuario_nombre'] = $usuario['nombre'];
         $_SESSION['usuario_rol'] = $usuario['rol'];
 
-        header('Location: ' . BASE_URL . '/View/Aprendizaje.html');
+        header('Location: ' . BASE_URL . '/View/aprendizaje.php');
         exit();
 
     } catch (Exception $e) {

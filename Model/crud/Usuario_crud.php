@@ -52,7 +52,7 @@ class Usuario_crud {
 
     $nombre = $usuario->getNombre();
     $email = $usuario->getEmail();
-    $password = password_hash($usuario->getPassword(), PASSWORD_DEFAULT);
+    $password = $usuario->getPassword();
     $cedula = $usuario->getCedula();
     $rol = $usuario->getRol();
     $institucion = $usuario->getInstitucion();
@@ -130,13 +130,12 @@ public function iniciarSesion($email, $password) {
         if ($row['correo'] === $correo) {
             $existeCorreo = true;
         }
-    }
-
-    $stmt->close();
+    }$stmt->close();
 
     return ['cedula' => $existeCedula, 'correo' => $existeCorreo];
-}
 
+    }
+    
 }
 
 ?>

@@ -16,7 +16,7 @@ class Usuario {
         $this->nombre = $nombre;
         $this->cedula = $cedula;
         $this->email = $email;
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $password;
         $this->rol = $rol;
         $this->institucion = $institucion;
         
@@ -61,10 +61,9 @@ class Usuario {
         $this->email = $email;
     }
 
-    public function setPassword($password) {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-    }
-
+   public function setPassword($password) {
+    $this->password = $password; // <- sin hash
+}
     public function setRol($rol) {
         $this->rol = $rol;
     }

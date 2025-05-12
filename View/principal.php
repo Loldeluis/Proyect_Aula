@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['usuario_nombre'])) {
+    $usuario = $_SESSION['usuario_nombre'];
+} 
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,43 +12,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aprende Programación</title>
     <link rel="stylesheet" href="../CSS/principal.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <div class="logo">
+    <div class="logo">
         <i class="fas fa-code"></i>
         <span>Aprende Programación</span>
     </div>
-    
+
     <div class="auth-buttons">
+    <?php if ($usuario): ?>  
+            <a href="perfil.php" class="auth-btn login-btn">
+                <i class="fas fa-user"></i>
+                <span>Hola, <?php echo htmlspecialchars($usuario); ?></span>
+            </a>
+            <a href="../Controller/usuarios/cerrar_sesion.php" class="auth-btn register-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar sesión</span>
+            </a>
+    <?php else: ?>
         <a href="login.php" class="auth-btn login-btn">
             <i class="fas fa-sign-in-alt"></i>
             <span>Iniciar sesión</span>
         </a>
-        <a href="../View/formulario_registro.php" class="auth-btn register-btn">
+        <a href="formulario_registro.php" class="auth-btn register-btn">
             <i class="fas fa-user-plus"></i>
             <span>Registrarse</span>
         </a>
-        </div>
-    </header>
+    <?php endif; ?>
+    </div>
+</header>
 
     <nav>
         <a href="#" onclick="showSection('inicio')">
             <i class="fas fa-home"></i>
             <span>Inicio</span>
         </a>
-
+        
         <a href="#" onclick="showSection('lenguajes')">
             <i class="fas fa-laptop-code"></i>
             <span>Lenguajes</span>
         </a>
-
+        
         <a href="#" onclick="showSection('recursos')">
             <i class="fas fa-book"></i>
             <span>Recursos</span>
         </a>
-
+        
         <a href="#" onclick="openModal('contactModal')">
             <i class="fas fa-envelope"></i>
             <span>Contacto</span>
@@ -53,16 +71,13 @@
         <div class="hero">
             <h1>Domina el Arte de la Programación</h1>
             <p>Sumérgete en el mundo del desarrollo de software y adquiere las habilidades más demandadas de la industria tecnológica.</p>
-        <img
-            src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
-            alt="Lenguajes de programación"
-            class="hero-img"/>
-        <br>
-        
-        <a href="Aprendizaje.html" class="btn">
-            <i class="fas fa-rocket"></i>
-            <span>Comenzar ahora</span>
-        </a>
+            <img src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg" alt="Lenguajes de programación" class="hero-img"/>
+            <br>
+
+        <a href="../View/login.php" class="btn">
+                <i class="fas fa-rocket"></i>
+                <span>Comenzar ahora</span>
+            </a>
         </div>
     </div>
 
@@ -150,7 +165,7 @@
         <p>© 2025 Aprende Programación. Todos los derechos reservados.</p>
         <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem;">
             <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
-            <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-twitter"></i></>
             <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
             <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
         </div>
