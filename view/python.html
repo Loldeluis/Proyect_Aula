@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicios python</title>
+    <link rel="stylesheet" href="../CSS/ejercicios.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Lista de Ejercicios</h1>
+    </header>
+
+    <main id="contenedor-ejercicios" class="contenedor-ejercicios"></main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal oculto">
+      <div class="modal-contenido">
+        <span id="cerrarModal" class="cerrar">&times;</span>
+        <p id="descripcion-ejercicio"></p>
+        <form
+          id="form-subida"
+          action="../controler/upload-html.php"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input type="hidden" id="numero-ejercicio" name="numero_ejercicio" />
+          <label for="archivo">Sube tu archivo (.java):</label>
+          <input
+            type="file"
+            id="archivo"
+            name="archivo"
+            accept=".java"
+            required
+          />
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="../JS/ejercicios.js"></script>
+
+    <a href="Aprendizaje.html">Regresar</a>
+  </body>
+</html>
