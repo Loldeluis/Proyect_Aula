@@ -28,8 +28,8 @@ unset($_SESSION['mensaje_exito']);
 </head>
 <body>
     <a href="principal.php" class="back-button">
-  <i class="fas fa-arrow-left"></i>
-  <span>Volver</span>
+    <i class="fas fa-arrow-left"></i>
+    <span>Volver</span>
 </a>
     <div id = "login"> 
     <form action = "../Controller/usuarios/iniciar_sesion.php" method="post">
