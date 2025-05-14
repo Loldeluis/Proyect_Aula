@@ -1,5 +1,5 @@
 <?php
-$connection_obj = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+$connection_obj = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
 
 if (!$connection_obj) {
     echo "Error No: " . mysqli_connect_errno();

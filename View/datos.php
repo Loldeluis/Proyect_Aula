@@ -1,59 +1,91 @@
 <?php
 session_start();
+$connection_obj = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
 
-$connection_obj = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-
-// Verifica la conexión
 if (!$connection_obj) {
-    die("Error al conectar con la base de datos: " . mysqli_connect_error());
+    die("Error de conexión: " . mysqli_connect_error());
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// --- LÓGICA DE REGISTRO (desde panel admin) ---
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre'])) {
+    $name = trim($_POST['nombre']);
+    $cedula = trim($_POST['cedula']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    $rol = $_POST['rol'];
+
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = "INSERT INTO usuarios (cedula, nombre_usuario, correo, clave, rol, estado) VALUES (?, ?, ?, ?, ?, 1)";
+    $stmt = mysqli_prepare($connection_obj, $query);
+    mysqli_stmt_bind_param($stmt, "sssss", $cedula, $name, $email, $hashed_password, $rol);
+
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt); // ✅ Cerramos la sentencia
+        header("Location: panel_admin/usuarios.php?success=Usuario+registrado");
+    } else {
+        mysqli_stmt_close($stmt); // ✅ Cerramos también en caso de error
+        header("Location: panel_admin/registrar_usuario.php?error=" . urlencode(mysqli_error($connection_obj)));
+    }
+    exit();
+}
+
+// --- LÓGICA DE LOGIN (desde login.html) ---
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && !isset($_POST['nombre'])) {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    // Consulta que trae la clave, nombre de usuario y rol
-    $query = "SELECT id_usuario, clave, nombre_usuario, rol, estado FROM usuarios WHERE correo = ?";
+    if (empty($email) || empty($password)) {
+        echo "<script>alert('Complete todos los campos'); window.location.href='login.html';</script>";
+        exit();
+    }
 
-    if ($stmt = mysqli_prepare($connection_obj, $query)) {
-        mysqli_stmt_bind_param($stmt, "s", $email);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_bind_result($stmt, $id_usuario, $hashed_password, $nombre_usuario, $rol, $estado);
-    
-        if (mysqli_stmt_fetch($stmt)) {
-            if ($estado != 1) {
-                echo "<script>alert('Usuario inactivo'); window.location.href='login.html';</script>";
-                exit();
-            }
-    
-            if (password_verify($password, $hashed_password)) {
-                $_SESSION['usuario_id'] = $id_usuario;  // <-- NUEVO
-                $_SESSION['correo'] = $email;
-                $_SESSION['nombre_usuario'] = $nombre_usuario;
-                $_SESSION['rol'] = $rol;
-    
-                // Redirección según el rol
-                if ($rol === 'docente') {
-                    header("Location: docente.php");
-                } elseif ($rol === 'estudiante') {
-                    header("Location: principal.php");
-                } elseif ($rol === 'admin') {
-                    header("Location: admin.php"); 
-                } else {
-                    echo "<script>alert('Rol no reconocido'); window.location.href='login.html';</script>";
-                }
-                exit();
-            } else {
-                echo "<script>alert('Contraseña incorrecta'); window.location.href='login.html';</script>";
-            }
-        } else {
-            echo "<script>alert('Usuario no encontrado'); window.location.href='login.html';</script>";
+    $query = "SELECT id_usuario, clave, nombre_usuario, rol, estado FROM usuarios WHERE correo = ?";
+    $stmt = mysqli_prepare($connection_obj, $query);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $id_usuario, $hashed_password, $nombre_usuario, $rol, $estado);
+
+    if (mysqli_stmt_fetch($stmt)) {
+        if ($estado != 1) {
+            mysqli_stmt_close($stmt); // ✅ Cerrar antes de salir
+            echo "<script>alert('Usuario inactivo'); window.location.href='login.html';</script>";
+            exit();
         }
 
-        mysqli_stmt_close($stmt);
+        if (password_verify($password, $hashed_password)) {
+            mysqli_stmt_close($stmt); // ✅ Cerrar antes de otra consulta
+            $_SESSION['usuario_id'] = $id_usuario;
+            $_SESSION['correo'] = $email;
+            $_SESSION['nombre_usuario'] = $nombre_usuario;
+            $_SESSION['rol'] = $rol;
+
+            // ✅ Insertar registro de entrada
+            $fecha_entrada = date('Y-m-d H:i:s');
+            $insert_log = "INSERT INTO accesos_usuario (id_usuario, fecha_entrada, estado_acceso) 
+                           VALUES (?, ?, 'Éxito')";
+            $log_stmt = mysqli_prepare($connection_obj, $insert_log);
+            mysqli_stmt_bind_param($log_stmt, "is", $id_usuario, $fecha_entrada);
+            mysqli_stmt_execute($log_stmt);
+            mysqli_stmt_close($log_stmt); // ✅ Cerramos también esta sentencia
+
+            // Redirección por rol
+            if ($rol === 'admin') {
+                header("Location: panel_admin/paneladmin.php");
+            } elseif ($rol === 'docente') {
+                header("Location: docente.php");
+            } else {
+                header("Location: principal.php");
+            }
+            exit();
+        } else {
+            mysqli_stmt_close($stmt); // ✅ Cerrar si la contraseña no coincide
+        }
     } else {
-        echo "Error en la consulta: " . mysqli_error($connection_obj);
+        mysqli_stmt_close($stmt); // ✅ También cerrar si no encuentra el usuario
     }
+
+    echo "<script>alert('Credenciales incorrectas'); window.location.href='login.html';</script>";
 }
 
 mysqli_close($connection_obj);
