@@ -1,5 +1,4 @@
 <?php
-define('BASE_URL', 'http://localhost/ProyectoAula');
 $baseDir = dirname(dirname(__DIR__));
 require_once($baseDir . '/Model/entity/Conexion.php');
 require_once($baseDir . '/Model/crud/Usuario_crud.php');

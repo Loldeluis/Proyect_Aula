@@ -1,10 +1,14 @@
 <?php
 session_start();
+require_once '../Model/entity/Conexion.php';
+if (isset($_SESSION['usuario_id'])) {
+    // Si ya está logueado, lo redirige a la página principal
+    header('Location: ' . BASE_URL . '/View/aprendizaje.php');
+    exit();
+}
 $mensajeExito = $_SESSION['mensaje_exito'] ?? '';
 unset($_SESSION['mensaje_exito']);
 ?>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php if ($mensajeExito): ?>
 <script>
     Swal.fire({

@@ -1,11 +1,13 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['usuario_nombre']) || $_SESSION['usuario_rol'] !== 'estudiante') {
-    echo 'usuario_nombre';
-    exit;  
+    // Redirigir si no cumple los requisitos
+    header('Location: ../principal.php');
+    exit;
 }
 
-$nombre_estudiante = $_SESSION['usuario_nombre'];
+$usuario = $_SESSION['usuario_nombre'];
 ?>
 
 <!DOCTYPE html>
@@ -16,13 +18,24 @@ $nombre_estudiante = $_SESSION['usuario_nombre'];
     <title>Dashboard - Aprende Programación</title>
     <link rel="stylesheet" href="../CSS/aprendizaje.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 </head>
 <body>
     <header>
-    <i class="fas fa-laptop-code"></i>
-    <span>Bienvenido estudiante: <?php echo $_SESSION['usuario_nombre']; ?></span>
-    </header>
-
+    <div class="auth-buttons">
+    <?php if (isset($usuario) && !empty($usuario)): ?>  
+            <a href="perfil.php" class="auth-btn login-btn">
+                <i class="fas fa-user"></i>
+                <span>Hola, <?php echo htmlspecialchars($usuario); ?></span>
+            </a>
+            <a href="../Controller/usuarios/cerrar_sesion.php" class="auth-btn register-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar sesión</span>
+            </a>
+    <?php endif; ?>
+    </div>
+</header>
+    
     <div class="container">
         <h2>Selecciona un lenguaje de programación</h2>
         <p class="welcome-message">Elige un lenguaje y nivel para comenzar tu aprendizaje</p>
@@ -34,17 +47,16 @@ $nombre_estudiante = $_SESSION['usuario_nombre'];
 
         <button class="btn" onclick="window.location.href='ver_desafios.php'">
         <i class="fas fa-tasks"></i> Ver Desafíos Asignados
-    </button>
+        </button>
 
     </div>
     <div class="language-box" style="border-left: 8px solid #20c997;">
-    <h3>Inscribirse a Curso</h3>
-    <p>Explora cursos disponibles y únete para comenzar a aprender.</p>
-    <button class="btn" onclick="location.href='inscribirse_curso.php'">Ver Cursos</button>
-    <button class="btn" onclick="location.href='ver_calificaciones.php'">Ver Calificaciones</button>
-</div>
+        <h3>Inscribirse a Curso</h3>
+        <p>Explora cursos disponibles y únete para comenzar a aprender.</p>
+        <button class="btn" onclick="location.href='inscribirse_curso.php'">Ver Cursos</button>
+        <button class="btn" onclick="location.href='ver_calificaciones.php'">Ver Calificaciones</button>
+    </div>
+    <script src ="../JS/aprendizaje.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src ="../JS/seleccionarNivel.js"></script>
-    
 </body>
 </html>

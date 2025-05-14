@@ -31,8 +31,10 @@ unset($_SESSION['error_registro'], $_SESSION['form_data'], $_SESSION['campo_erro
     </script>
 </head>
 <body>
-    <a href="../View/principal.php" class="back-button">Inicio</a>
-    
+    <button class="back-button" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </button>
     <div class="form-container">
             
         <form action="../Controller/usuarios/registrar_usuario.php" method="post" id="formRegistro">  
