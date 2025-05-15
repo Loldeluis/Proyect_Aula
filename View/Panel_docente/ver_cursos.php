@@ -6,15 +6,15 @@ if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
     header('Location: login.html');
     exit();
 }
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
 $nombre_docente = $_SESSION['nombre_usuario'];
 $id_docente = $_SESSION['usuario_id']; // Este debe estar guardado en login
 
 // Conexión
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-if (!$conn) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
+
 
 // Consulta de cursos asignados al docente
 $sql = "SELECT id_curso, nombre, codigo, nivel FROM cursos WHERE id_docente = ?";

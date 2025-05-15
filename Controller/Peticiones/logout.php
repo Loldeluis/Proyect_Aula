@@ -1,10 +1,11 @@
 <?php
 session_start();
-$connection_obj = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
-if (!$connection_obj) {
-    die("Error al conectar con la base de datos: " . mysqli_connect_error());
-}
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
+$conexionBD = new ConexionBD();
+$connection_obj = $conexionBD->conectar(); // objeto mysqli
+
 
 if (isset($_SESSION['id_acceso'])) {
     $id_acceso = $_SESSION['id_acceso'];

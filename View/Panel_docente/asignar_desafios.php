@@ -1,28 +1,38 @@
-<?php
+<?php 
 session_start();
 if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
     header('Location: login.html');
     exit();
 }
 
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
+
 $id_docente = $_SESSION['usuario_id'];
 
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-if (!$conn) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
+// Usar clase orientada a objetos para conectar
+$conexionObj = new ConexionBD();
+$conn = $conexionObj->conectar(); // esto reemplaza mysqli_connect
 
 // Obtener los cursos asignados al docente
 $cursos = [];
 $sql = "SELECT id_curso, nombre FROM cursos WHERE id_docente = ?";
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "i", $id_docente);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-while ($row = mysqli_fetch_assoc($result)) {
-    $cursos[] = $row;
+
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "i", $id_docente);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $cursos[] = $row;
+    }
+    mysqli_stmt_close($stmt);
+} else {
+    echo "Error al preparar la consulta: " . mysqli_error($conn);
 }
+
+$conexionObj->desconectar(); // opcional, si quieres cerrar manualmente
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

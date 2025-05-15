@@ -1,8 +1,7 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-if (!$conn) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
 
 $tipo = $_GET['tipo'] ?? null;
 $resultados = [];
@@ -47,7 +46,7 @@ $sql = "SELECT e.id_entrega, d.titulo, u.nombre_usuario AS estudiante, c.nombre 
         JOIN cursos c ON d.id_curso = c.id_curso
         JOIN usuarios u ON e.id_estudiante = u.id_usuario";
 
-   $stmt = mysqli_prepare($conn, $sql);
+    $stmt = mysqli_prepare($conn, $sql);
 if (!$stmt) {
     die("Error en la preparación de la consulta general: " . mysqli_error($conn));
 }
@@ -75,7 +74,7 @@ if (isset($stmt)) {
     <h2>Reportes de Desempeño</h2>
 
     <div class="btn-group">
-       <form method="GET" style="display: inline;">
+    <form method="GET" style="display: inline;">
     <input type="hidden" name="tipo" value="estudiante">
     <select name="id" required>
         <option value="">Selecciona un estudiante</option>
