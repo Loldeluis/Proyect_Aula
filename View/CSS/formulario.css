@@ -233,3 +233,24 @@ input:required:valid {
     margin-bottom: 1rem;
     display: block;
 }
+.error-container {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 12px 20px;
+            margin: 0 auto 20px;
+            max-width: 600px;
+            border-radius: 4px;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .campo-error {
+            border: 2px solid #f44336 !important;
+        }
+        
+        .mensaje-error {
+            color: #d32f2f;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: block;
+        }

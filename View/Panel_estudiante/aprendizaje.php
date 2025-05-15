@@ -29,7 +29,7 @@ $nombre_estudiante = $_SESSION['nombre_usuario'];
         <p class="welcome-message">Elige un lenguaje y nivel para comenzar tu aprendizaje</p>
         <div class="grid" id="languages-container"></div>
 
-        <button class="btn-back" onclick="window.location.href='Principal.php'">
+        <button class="btn-back" onclick="window.location.href='../Principal.php'">
             <i class="fas fa-arrow-left"></i> Volver al inicio
         </button>
 

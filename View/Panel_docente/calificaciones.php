@@ -14,7 +14,7 @@ if (!$conn) {
 // Obtener entregas de desafíos asignados por este docente
 $sql = "
 SELECT ed.id_entrega, u.nombre_usuario AS nombre_estudiante, d.titulo AS titulo_desafio, 
-       ed.contenido, ed.fecha_entrega, ed.calificacion, ed.retroalimentacion, ed.archivo
+ed.contenido, ed.fecha_entrega, ed.calificacion, ed.retroalimentacion, ed.archivo
 FROM entregas_desafios ed
 JOIN desafios d ON ed.id_desafio = d.id_desafio
 JOIN usuarios u ON ed.id_estudiante = u.id_usuario
@@ -56,7 +56,7 @@ mysqli_close($conn);
         <p>No hay entregas disponibles para calificar.</p>
     <?php else: ?>
         <?php foreach ($entregas as $entrega): ?>
-            <form method="post" action="guardar_calificacion.php" class="language-box" style="border-left: 8px solid #ffc107;">
+            <form method="post" action="../../Controller/Peticiones/guardar_calificacion.php" class="language-box" style="border-left: 8px solid #ffc107;">
                 <h3><?php echo htmlspecialchars($entrega['titulo_desafio']); ?></h3>
                 <p><strong>Estudiante:</strong> <?php echo htmlspecialchars($entrega['nombre_estudiante']); ?></p>
                 <p><strong>Entrega:</strong><br><?php echo nl2br(htmlspecialchars($entrega['contenido'])); ?></p>
@@ -74,7 +74,7 @@ mysqli_close($conn);
                 <button type="submit" class="btn">Guardar Calificación</button>
                  <?php if (!empty($entrega['archivo'])): ?>
     <p><strong>Archivo adjunto:</strong>
-        <a href="descargar_archivo.php?nombre=<?php echo urlencode($entrega['archivo']); ?>" class="btn" target="_blank">Descargar</a>
+        <a href="../../Controller/Peticiones/descargar_archivo.php?nombre=<?php echo urlencode($entrega['archivo']); ?>" class="btn" target="_blank">Descargar</a>
     </p>
 <?php endif; ?>
 

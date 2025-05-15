@@ -2,7 +2,7 @@
 $nombre_archivo = $_GET['nombre'] ?? '';
 
 if ($nombre_archivo) {
-    $ruta = "../archivos_entregas/" . basename($nombre_archivo); // ajusta si tu ruta es diferente
+    $ruta = "../../archivos_entregas/" . basename($nombre_archivo); // ajusta si tu ruta es diferente
 
     if (file_exists($ruta)) {
         header('Content-Description: File Transfer');

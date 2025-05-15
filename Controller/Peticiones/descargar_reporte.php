@@ -1,5 +1,5 @@
 <?php
-require('../libs/fpdf.php');
+require('../../libs/fpdf.php');
 
 $conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
 if (!$conn) {

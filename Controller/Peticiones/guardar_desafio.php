@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     mysqli_stmt_bind_param($stmt, "sssii", $titulo, $descripcion, $fecha_limite, $id_curso, $id_docente);
 
     if (mysqli_stmt_execute($stmt)) {
-        echo "<script>alert('Desafío asignado exitosamente'); window.location.href='docente.php';</script>";
+        echo "<script>alert('Desafío asignado exitosamente'); window.location.href=' ../../View/Panel_docente/docente.php';</script>";
     } else {
         echo "Error al guardar: " . mysqli_error($conn);
     }

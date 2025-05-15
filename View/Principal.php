@@ -29,7 +29,7 @@ if (isset($_SESSION['nombre_usuario'])) {
         <span style="color: white; margin-right: 10px;">
           👋 Hola, <?php echo htmlspecialchars($usuario); ?>
         </span>
-        <a href="logout.php" class="auth-btn logout-btn">
+        <a href="../Controller/Peticiones/logout.php" class="auth-btn logout-btn">
           <i class="fas fa-sign-out-alt"></i>
           <span>Cerrar sesión</span>
         </a>
@@ -38,7 +38,7 @@ if (isset($_SESSION['nombre_usuario'])) {
           <i class="fas fa-sign-in-alt"></i>
           <span>Iniciar sesión</span>
         </a>
-        <a href="formularioinsertar.html" class="auth-btn register-btn">
+        <a href="formulario_registro.php" class="auth-btn register-btn">
           <i class="fas fa-user-plus"></i>
           <span>Registrarse</span>
         </a>
@@ -48,7 +48,7 @@ if (isset($_SESSION['nombre_usuario'])) {
 
   <nav>
       <a href="#" onclick="showSection('inicio')">
-          <i class="fas fa-home"></i>
+        <i class="fas fa-home"></i>
           <span>Inicio</span>
       </a>
       <a href="#" onclick="showSection('lenguajes')">
@@ -76,7 +76,7 @@ if (isset($_SESSION['nombre_usuario'])) {
               class="hero-img"
           />
           <br />
-          <a href="Aprendizaje.php" class="btn">
+          <a href="../View/Panel_estudiante/aprendizaje.php" class="btn">
               <i class="fas fa-rocket"></i>
               <span>Comenzar ahora</span>
           </a>

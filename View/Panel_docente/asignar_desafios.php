@@ -37,7 +37,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     </header>
 
     <div class="container">
-        <form method="POST" action="guardar_desafio.php">
+        <form method="POST" action="../../Controller/Peticiones/guardar_desafio.php">
             <label for="curso">Curso:</label><br>
             <select name="id_curso" required>
                 <option value="">Seleccione un curso</option>

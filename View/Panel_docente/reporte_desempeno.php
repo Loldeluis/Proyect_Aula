@@ -140,7 +140,7 @@ if (isset($stmt)) {
     <?php endif; ?>
     <?php if ($tipo): ?>
     <div style="margin-top: 30px;">
-        <a href="descargar_reporte.php?tipo=<?php echo urlencode($tipo); ?>&id=<?php echo $_GET['id'] ?? ''; ?>" class="btn">Descargar</a>
+        <a href="../../Controller/Peticiones/descargar_reporte.php?tipo=<?php echo urlencode($tipo); ?>&id=<?php echo $_GET['id'] ?? ''; ?>" class="btn">Descargar</a>
     </div>
 <?php endif; ?>
 </div>

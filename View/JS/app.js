@@ -123,7 +123,7 @@ function showSection(sectionId) {
     // Muestra la sección seleccionada
     document.getElementById(sectionId).style.display = "block";
     
-    // Desplazamiento suave al inicio de la sección
+
     window.scrollTo({
         top: 0,
         behavior: "smooth"

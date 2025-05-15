@@ -18,7 +18,7 @@ if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) 
     $archivoNombre = uniqid() . "_" . basename($nombre_original);
 
     // Asegurar que el directorio existe
-    $directorio = "../archivos_entregas/";
+    $directorio = "../../archivos_entregas/";
     if (!is_dir($directorio)) {
         mkdir($directorio, 0777, true);
     }
@@ -43,7 +43,7 @@ mysqli_stmt_bind_param($stmt, "iiss", $id_desafio, $id_estudiante, $contenido, $
 
 if (mysqli_stmt_execute($stmt)) {
     echo "Entrega registrada correctamente.";
-    echo "<br><a href='ver_desafios.php'>Volver a desafíos</a>";
+    echo "<br><a href='../../View/Panel_estudiante/ver_desafios.php'>Volver a desafíos</a>";
 } else {
     echo "Error al registrar la entrega: " . mysqli_error($conn);
 }

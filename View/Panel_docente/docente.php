@@ -61,7 +61,7 @@ $nombre_docente = $_SESSION['nombre_usuario'];
        
     </div>
 
-    <button class="btn-back" onclick="location.href='logout.php'">
+    <button class="btn-back" onclick="location.href='../../Controller/Peticiones/logout.php'">
         <i class="fas fa-sign-out-alt"></i> Cerrar sesión
     </button>
 </div>

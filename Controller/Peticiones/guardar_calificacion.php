@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Ejecutamos la consulta
     if (mysqli_stmt_execute($stmt)) {
-        header("Location: calificaciones.php?ok=1");
+        header("Location: ../../View/Panel_docente/calificaciones.php?ok=1");
         exit(); // Aseguramos que no siga ejecutándose el script
     } else {
         echo "Error al guardar la calificación.";

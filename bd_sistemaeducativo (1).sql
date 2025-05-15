@@ -371,6 +371,11 @@ ALTER TABLE `accesos_usuario`
   ADD CONSTRAINT `accesos_usuario_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
   ADD CONSTRAINT `accesos_usuario_ibfk_2` FOREIGN KEY (`id_institucion`) REFERENCES `instituciones` (`id_institucion`);
 
+  ALTER TABLE accesos_usuario
+ADD fecha_entrada DATETIME NULL,
+ADD fecha_salida DATETIME NULL,
+ADD estado_acceso VARCHAR(20) DEFAULT 'Éxito';
+
 --
 -- Filtros para la tabla `cursos`
 --
