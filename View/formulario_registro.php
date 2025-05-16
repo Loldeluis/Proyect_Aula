@@ -76,8 +76,7 @@ unset($_SESSION['error_registro'], $_SESSION['form_data'], $_SESSION['campo_erro
                     placeholder="Escriba contraseña" minlength="6"><br><br>
     
                 <label for="confirm_password">Confirmar contraseña:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required 
-                    placeholder="Repita la contraseña" minlength="6"><br><br>
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repita la contraseña" minlength="6"><br><br>
                 
                 <input type="submit" value="Registrar">
             </div>

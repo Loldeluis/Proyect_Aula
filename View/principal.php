@@ -4,7 +4,6 @@ $usuario = null;
 if (isset($_SESSION['usuario_nombre'])) {
     $usuario = $_SESSION['usuario_nombre'];
 } 
-
 ?>
 <!DOCTYPE html>
 <html lang="es">

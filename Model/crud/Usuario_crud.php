@@ -3,7 +3,7 @@ $baseDir = dirname(dirname(__DIR__));
 require_once($baseDir . '../Model/entity/Conexion.php');
 require_once($baseDir . '../Model/entity/Usuario.php');
 
-$_SESSION['error_registro'] = $mensaje;
+$_SESSION['error_registro'] = $mensaje ?? null;
 $_SESSION['campo_error'] = $campoError ?? null; 
 $_SESSION['form_data'] = $_POST;
 class Usuario_crud {
@@ -107,6 +107,25 @@ public function iniciarSesion($email, $password) {
         'rol' => $usuario['rol']
     ];
 }
+public function obtenerUsuarioPorId($id) {
+    $conexion = Conexion::obtenerConexion();
+    $sql = "SELECT u.nombre_usuario, u.correo, u.cedula, u.rol, i.nombre AS institucion 
+        FROM usuarios u 
+        JOIN instituciones i ON u.id_institucion = i.id_institucion 
+        WHERE u.id_usuario = ?";
+    $stmt = $conexion->prepare($sql);
+    
+    if (!$stmt) {
+        throw new Exception("Error en prepare: " . $conexion->error);
+    }
+
+    $stmt->bind_param("i", $id);  // "i" indica que el parámetro es un entero
+    $stmt->execute();
+    
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_assoc();
+}
+
     public function verificarExistencia($cedula, $correo) {
     $sql = "SELECT cedula, correo FROM usuarios WHERE cedula = ? OR correo = ?";
     $stmt = $this->conexion->prepare($sql);

@@ -22,6 +22,10 @@ $usuario = $_SESSION['usuario_nombre'];
 </head>
 <body>
     <header>
+        <div class="logo">
+        <i class="fas fa-code"></i>
+        <span>Aprende Programación</span>
+    </div>
     <div class="auth-buttons">
     <?php if (isset($usuario) && !empty($usuario)): ?>  
             <a href="perfil.php" class="auth-btn login-btn">

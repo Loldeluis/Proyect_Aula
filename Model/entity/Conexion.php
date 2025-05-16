@@ -4,7 +4,6 @@ class Conexion {
     private static $instancia = null;
     private $conexion;
     
-   
     private function __construct() {
         $host = "localhost"; 
         $user = "root"; 
