@@ -126,6 +126,58 @@ public function obtenerUsuarioPorId($id) {
     return $resultado->fetch_assoc();
 }
 
+public function actualizarPerfil($id_usuario, $nombre, $email) {
+    $conexion = Conexion::obtenerConexion();
+    $sql = "UPDATE usuarios SET nombre_usuario = ?, correo = ? WHERE id_usuario = ?";
+    $stmt = $conexion->prepare($sql);
+
+    if (!$stmt) {
+        error_log("Error en prepare: " . $conexion->error);
+        return false;
+    }
+
+    $stmt->bind_param("ssi", $nombre, $email, $id_usuario);
+    $resultado = $stmt->execute();
+    $stmt->close();
+    
+    return $resultado;
+}
+
+public function actualizarContrasena($id_usuario, $hashNueva) {
+    $sql = "UPDATE usuarios SET password = ? WHERE id = ?";
+    $stmt = $this->conexion->prepare($sql);
+    if (!$stmt) {
+        return false; // error en prepare
+    }
+    $stmt->bind_param('si', $hashNueva, $id_usuario); // 's' para string, 'i' para int
+    $resultado = $stmt->execute();
+    $stmt->close();
+    return $resultado;
+}
+
+public function eliminarUsuarioPorId($id){
+    try {
+        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+
+        if (!$stmt) {
+            error_log('Error al preparar la consulta: ' . $conexion->error);
+            return false;
+        }
+
+        $stmt->bind_param('i', $id); 
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log('Error al ejecutar la consulta: ' . $stmt->error);
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log('Error al eliminar usuario: ' . $e->getMessage());
+        return false;
+    }
+}
     public function verificarExistencia($cedula, $correo) {
     $sql = "SELECT cedula, correo FROM usuarios WHERE cedula = ? OR correo = ?";
     $stmt = $this->conexion->prepare($sql);
