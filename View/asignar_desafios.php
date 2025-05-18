@@ -7,7 +7,7 @@ if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
 
 $id_docente = $_SESSION['usuario_id'];
 
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+$conn = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
 if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
 }

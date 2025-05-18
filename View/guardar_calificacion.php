@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $calificacion = $_POST['calificacion'];
     $retroalimentacion = $_POST['retroalimentacion'];
 
-    $conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+    $conn = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
     if (!$conn) {
         die("Error de conexión: " . mysqli_connect_error());
     }

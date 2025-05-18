@@ -11,7 +11,7 @@ $nombre_docente = $_SESSION['nombre_usuario'];
 $id_docente = $_SESSION['usuario_id']; // Este debe estar guardado en login
 
 // Conexión
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+$conn = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
 if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
 }

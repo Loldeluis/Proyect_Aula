@@ -16,7 +16,7 @@ if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) 
     move_uploaded_file($archivoTmp, "../archivos/" . $archivoNombre);
 }
 
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+$conn = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
 if (!$conn) {
     die("Error de conexión: " . mysqli_connect_error());
 }

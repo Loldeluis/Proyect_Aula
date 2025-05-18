@@ -47,7 +47,7 @@ $result = mysqli_query($connection_obj, $query);
 <head>
     <meta charset="UTF-8">
     <title>Usuarios</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="../../CSS/css_admin/usuariosAdmin.css">
 </head>
 <body>
     <div class="container">

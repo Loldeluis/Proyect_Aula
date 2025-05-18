@@ -1,7 +1,7 @@
 <?php
 session_start();
+date_default_timezone_set('America/Bogota'); // ✅ Establecer zona horaria local
 
-// Conectar a la base de datos
 $connection_obj = mysqli_connect("localhost", "root", "", "bd_sistemaeducativo");
 if (!$connection_obj) {
     die("Error de conexión: " . mysqli_connect_error());
@@ -20,6 +20,6 @@ if ($id_usuario) {
 
 session_destroy();
 mysqli_close($connection_obj);
-
 header("Location: principal.php");
 exit();
+?>

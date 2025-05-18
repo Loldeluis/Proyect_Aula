@@ -20,11 +20,8 @@ $result = mysqli_query($connection_obj, $query);
 <html>
 <head>
     <title>Historial de Accesos</title>
-    <style>
-        table { border-collapse: collapse; width: 80%; margin: 20px auto; }
-        th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
-        th { background-color: #f2f2f2; }
-    </style>
+    
+    <link rel="stylesheet" href="../../CSS/css_admin/ver_accesos.css">
 </head>
 <body>
     <h2 style="text-align:center;">Historial de Accesos</h2>
