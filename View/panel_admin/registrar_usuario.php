@@ -10,7 +10,8 @@ if ($_SESSION['rol'] != 'admin') {
 <head>
     <meta charset="UTF-8">
     <title>Registrar Usuario</title>
-    <link rel="stylesheet" href="../CSS/estilosadmin.css">
+    <link rel="stylesheet" href="../../CSS/css_admin/registrarAdmin.css">
+
 </head>
 <body>
     <div class="container">
@@ -18,7 +19,7 @@ if ($_SESSION['rol'] != 'admin') {
         <?php if (isset($_GET['error'])): ?>
             <div class="error"><?= htmlspecialchars($_GET['error']) ?></div>
         <?php endif; ?>
-        <form action="../../PHP/insertar.php" method="post">
+        <form action="../datos.php" method="post">
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="text" name="cedula" placeholder="Cédula" required>
             <input type="email" name="email" placeholder="Email" required>

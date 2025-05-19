@@ -1,10 +1,10 @@
 <?php
 require('../../libs/fpdf.php');
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-if (!$conn) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
+
 
 $tipo = $_GET['tipo'] ?? null;
 $id = $_GET['id'] ?? null;

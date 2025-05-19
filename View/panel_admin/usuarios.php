@@ -5,13 +5,17 @@ if ($_SESSION['rol'] != 'admin') {
     exit();
 }
 
-$connection_obj = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
+
+// Crear conexión
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
 
 // Procesar eliminación inmediata
 if (isset($_GET['eliminar'])) {
     $id = intval($_GET['eliminar']);
     $query = "UPDATE usuarios SET estado = 0 WHERE id_usuario = $id";
-    mysqli_query($connection_obj, $query);
+    mysqli_query($conn, $query);
     header("Location: usuarios.php?success=Usuario+inactivado");
     exit();
 }
@@ -19,10 +23,10 @@ if (isset($_GET['eliminar'])) {
 // Procesar edición inmediata (formulario embebido)
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editar_usuario'])) {
     $id = intval($_POST['id']);
-    $cedula = mysqli_real_escape_string($connection_obj, $_POST['cedula']);
-    $nombre = mysqli_real_escape_string($connection_obj, $_POST['nombre']);
-    $email = mysqli_real_escape_string($connection_obj, $_POST['email']);
-    $rol = mysqli_real_escape_string($connection_obj, $_POST['rol']);
+    $cedula = mysqli_real_escape_string($conn, $_POST['cedula']);
+    $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $rol = mysqli_real_escape_string($conn, $_POST['rol']);
     $estado = intval($_POST['estado']);
     
     $query = "UPDATE usuarios SET 
@@ -33,21 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editar_usuario'])) {
               estado = $estado 
               WHERE id_usuario = $id";
     
-    mysqli_query($connection_obj, $query);
+    mysqli_query($conn, $query);
     header("Location: usuarios.php?success=Usuario+actualizado");
     exit();
 }
 
 // Obtener usuarios
 $query = "SELECT id_usuario, cedula, nombre_usuario, correo, rol, estado FROM usuarios";
-$result = mysqli_query($connection_obj, $query);
+$result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Usuarios</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="../../CSS/css_admin/usuariosAdmin.css">
 </head>
 <body>
     <div class="container">
@@ -130,4 +134,4 @@ $result = mysqli_query($connection_obj, $query);
     </div>
 </body>
 </html>
-<?php mysqli_close($connection_obj); ?>
+<?php mysqli_close($conn); ?>

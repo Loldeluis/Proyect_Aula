@@ -4,16 +4,16 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'docente') {
     header('Location: login.html');
     exit();
 }
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id_entrega = $_POST['id_entrega'];
     $calificacion = $_POST['calificacion'];
     $retroalimentacion = $_POST['retroalimentacion'];
 
-    $conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-    if (!$conn) {
-        die("Error de conexión: " . mysqli_connect_error());
-    }
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
+
 
     // Actualizamos la consulta para que los tipos de los parámetros sean correctos
     $sql = "UPDATE entregas_desafios SET calificacion = ?, retroalimentacion = ? WHERE id_entrega = ?";

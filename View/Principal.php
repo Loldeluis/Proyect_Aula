@@ -14,8 +14,7 @@ if (isset($_SESSION['nombre_usuario'])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aprende Programación</title>
-     <link rel="stylesheet" href="css/principal.css">
-
+  <link rel="stylesheet" href="../CSS/principal.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -39,7 +38,7 @@ if (isset($_SESSION['nombre_usuario'])) {
           <i class="fas fa-sign-in-alt"></i>
           <span>Iniciar sesión</span>
         </a>
-        <a href="formulario_registro.php" class="auth-btn register-btn">
+        <a href="formularioinsertar.html" class="auth-btn register-btn">
           <i class="fas fa-user-plus"></i>
           <span>Registrarse</span>
         </a>
@@ -49,7 +48,7 @@ if (isset($_SESSION['nombre_usuario'])) {
 
   <nav>
       <a href="#" onclick="showSection('inicio')">
-        <i class="fas fa-home"></i>
+          <i class="fas fa-home"></i>
           <span>Inicio</span>
       </a>
       <a href="#" onclick="showSection('lenguajes')">
@@ -72,7 +71,7 @@ if (isset($_SESSION['nombre_usuario'])) {
           <h1>Domina el Arte de la Programación</h1>
           <p>Sumérgete en el mundo del desarrollo de software y adquiere las habilidades más demandadas de la industria tecnológica.</p>
           <img
-              src="img/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
+              src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
               alt="Lenguajes de programación"
               class="hero-img"
           />

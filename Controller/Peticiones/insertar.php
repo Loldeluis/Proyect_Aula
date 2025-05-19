@@ -1,10 +1,9 @@
 <?php
 session_start();
-$connection_obj = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
+$conexionBD = new ConexionBD();
+$connection_obj = $conexionBD->conectar(); // objeto mysqli
 
-if (!$connection_obj) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
 
 // --- LÓGICA DE REGISTRO (desde panel admin) ---
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre'])) {

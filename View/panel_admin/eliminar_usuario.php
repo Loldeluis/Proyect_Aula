@@ -4,8 +4,12 @@ if ($_SESSION['rol'] != 'admin') {
     header("Location: ../../login.html");
     exit();
 }
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
-$connection_obj = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
+
+
 $id = $_GET['id'];
 
 $query = "UPDATE usuarios SET estado = 0 WHERE id_usuario = ?";

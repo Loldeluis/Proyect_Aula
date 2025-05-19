@@ -4,13 +4,13 @@ if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
     header('Location: login.html');
     exit();
 }
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
 $id_docente = $_SESSION['usuario_id'];
 
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-if (!$conn) {
-    die("Error al conectar: " . mysqli_connect_error());
-}
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_curso = $_POST['id_curso'];

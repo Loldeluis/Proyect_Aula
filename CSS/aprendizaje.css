@@ -137,7 +137,6 @@ header {
 .progress-practice {
     background-color: #00ccff;
 }
-<<<<<<< HEAD:CSS/aprendizaje.css
 <<<<<<< HEAD
 =======
 
@@ -215,29 +214,3 @@ body {
     margin-bottom: 20px;
 }
 >>>>>>> lewis
-=======
-
-/* Aseguramos que los botones se alineen horizontalmente */
-.table-desafios td a.btn {
-    display: inline-block;
-    margin: 5px 10px 10px 0; /* top, right, bottom, left */
-    padding: 5px 10px;
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-}
-
-
-/* Si quieres cambiar el estilo al pasar el ratón */
-.table-desafios td a.btn:hover {
-    background-color: #45a049;
-}
-
-.table-desafios {
-    width: 100%;
-    border-collapse: separate; /* Permite espacio entre filas */
-    border-spacing: 0 20px; /* Espaciado vertical entre filas (12px) */
-}
->>>>>>> 4ab433e917360bb72fa5c86877dcfa49f9e0b484:View/CSS/aprendizaje.css

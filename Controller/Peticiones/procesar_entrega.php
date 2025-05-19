@@ -4,6 +4,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'estudiante') {
     header('Location: login.html');
     exit();
 }
+require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
 
 $id_estudiante = $_SESSION['usuario_id'];
 $id_desafio = $_POST['id_desafio'];
@@ -32,10 +33,9 @@ if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) 
     }
 }
 
-$conn = mysqli_connect("localhost", "root", "root", "bd_sistemaeducativo");
-if (!$conn) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
+$conexion = new ConexionBD();
+$conn = $conexion->conectar();
+
 
 $sql = "INSERT INTO entregas_desafios (id_desafio, id_estudiante, contenido, archivo) VALUES (?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $sql);
