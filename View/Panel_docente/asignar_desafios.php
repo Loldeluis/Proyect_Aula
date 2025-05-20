@@ -1,82 +1,62 @@
-<?php 
+<?php
 session_start();
-if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
-    header('Location: login.html');
+
+// Verificación de rol
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'docente') {
+    header("Location: ../login.html");
     exit();
 }
 
-require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
+require_once __DIR__ . '/../../Controller/DesafioController.php';
 
-$id_docente = $_SESSION['usuario_id'];
+// Inicializar controlador
+$controller = new DesafioController();
+$mensaje = "";
 
-// Usar clase orientada a objetos para conectar
-$conexionObj = new ConexionBD();
-$conn = $conexionObj->conectar(); // esto reemplaza mysqli_connect
+// Procesar envío del formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titulo = $_POST['titulo'] ?? '';
+    $descripcion = $_POST['descripcion'] ?? '';
+    $fecha_limite = $_POST['fecha_limite'] ?? '';
+    $id_docente = $_SESSION['id_usuario']; // O la variable que uses
 
-// Obtener los cursos asignados al docente
-$cursos = [];
-$sql = "SELECT id_curso, nombre FROM cursos WHERE id_docente = ?";
-$stmt = mysqli_prepare($conn, $sql);
-
-if ($stmt) {
-    mysqli_stmt_bind_param($stmt, "i", $id_docente);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    while ($row = mysqli_fetch_assoc($result)) {
-        $cursos[] = $row;
+    if ($controller->crearDesafio($titulo, $descripcion, $fecha_limite, $id_docente)) {
+        $mensaje = "✅ Desafío asignado correctamente.";
+    } else {
+        $mensaje = "❌ Error al asignar el desafío.";
     }
-    mysqli_stmt_close($stmt);
-} else {
-    echo "Error al preparar la consulta: " . mysqli_error($conn);
 }
-
-$conexionObj->desconectar(); // opcional, si quieres cerrar manualmente
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Asignar Desafío</title>
-    <link rel="stylesheet" href="../CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../../CSS/css_docente/asignarDesafio.css">
 </head>
 <body>
-    <header>
-        <h2>Asignar Desafío</h2>
-    </header>
-
     <div class="container">
-        <form method="POST" action="../../Controller/Peticiones/guardar_desafio.php">
-            <label for="curso">Curso:</label><br>
-            <select name="id_curso" required>
-                <option value="">Seleccione un curso</option>
-                <?php foreach ($cursos as $curso): ?>
-                    <option value="<?php echo $curso['id_curso']; ?>">
-                        <?php echo htmlspecialchars($curso['nombre']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select><br><br>
+        <h1>Asignar Nuevo Desafío</h1>
 
-            <label for="titulo">Título del desafío:</label><br>
-            <input type="text" name="titulo" required><br><br>
+        <?php if ($mensaje): ?>
+            <div class="mensaje"><?= htmlspecialchars($mensaje) ?></div>
+        <?php endif; ?>
 
-            <label for="descripcion">Descripción:</label><br>
-            <textarea name="descripcion" rows="5" required></textarea><br><br>
+        <form method="POST" action="asignar_desafios.php">
+            <label for="titulo">Título:</label>
+            <input type="text" name="titulo" required>
 
-            <label for="fecha_limite">Fecha límite:</label><br>
-            <input type="date" name="fecha_limite"><br><br>
+            <label for="descripcion">Descripción:</label>
+            <textarea name="descripcion" required></textarea>
 
-            <input type="submit" value="Guardar desafío" class="btn">
+            <label for="fecha_limite">Fecha Límite:</label>
+            <input type="date" name="fecha_limite" required>
+
+            <button type="submit">Asignar</button>
         </form>
 
-        
-        <button class="btn-back" onclick="location.href='docente.php'">
-            <i class="fas fa-arrow-left"></i> Volver al panel
-        </button>
-            <button class="btn" onclick="location.href='ver_mis_desafios.php'">
-            <i class="fas fa-arrow-left"></i> Ver desafios
-        </button>
+        <a href="paneldocente.php" class="btn">Volver al Panel</a>
     </div>
 </body>
 </html>
