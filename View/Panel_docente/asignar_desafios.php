@@ -1,45 +1,50 @@
 <?php
 session_start();
-
-// Verificación de rol
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'docente') {
-    header("Location: ../login.html");
+if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
+    header("Location: ../../login.html");
     exit();
 }
 
-require_once __DIR__ . '/../../Controller/DesafioController.php';
+require_once __DIR__ . '/../../Controller/Docente/DesafioController.php';
+require_once __DIR__ . '/../../Model/Docente/CursoModel.php';
 
-// Inicializar controlador
 $controller = new DesafioController();
+$id_docente = $_SESSION['usuario_id'];
 $mensaje = "";
+if (!class_exists('CursoModel')) {
+    die('La clase CursoModel no fue encontrada. Revisa el archivo y su contenido.');
+}
 
-// Procesar envío del formulario
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo = $_POST['titulo'] ?? '';
-    $descripcion = $_POST['descripcion'] ?? '';
-    $fecha_limite = $_POST['fecha_limite'] ?? '';
-    $id_docente = $_SESSION['id_usuario']; // O la variable que uses
+$cursos = (new CursoModel())->obtenerCursosPorDocente($id_docente); // Asegúrate de tener este método
 
-    if ($controller->crearDesafio($titulo, $descripcion, $fecha_limite, $id_docente)) {
-        $mensaje = "✅ Desafío asignado correctamente.";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $data = [
+        'titulo' => $_POST['titulo'] ?? '',
+        'descripcion' => $_POST['descripcion'] ?? '',
+        'fecha_limite' => $_POST['fecha_limite'] ?? '',
+        'id_curso' => $_POST['id_curso'] ?? 0,
+        'id_docente' => $id_docente
+    ];
+
+    if ($controller->asignarDesafio($data)) {
+        $mensaje = "Desafío asignado exitosamente.";
     } else {
-        $mensaje = "❌ Error al asignar el desafío.";
+        $mensaje = "Error al asignar desafío.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Asignar Desafío</title>
-    <link rel="stylesheet" href="../../CSS/css_docente/asignarDesafio.css">
+    <link rel="stylesheet" href="../CSS/asignarDesafio.css">
 </head>
 <body>
     <div class="container">
         <h1>Asignar Nuevo Desafío</h1>
 
-        <?php if ($mensaje): ?>
+        <?php if (!empty($mensaje)): ?>
             <div class="mensaje"><?= htmlspecialchars($mensaje) ?></div>
         <?php endif; ?>
 
@@ -53,10 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="fecha_limite">Fecha Límite:</label>
             <input type="date" name="fecha_limite" required>
 
+            <label for="id_curso">Curso:</label>
+            <select name="id_curso" required>
+                <option value="">Seleccione un curso</option>
+                <?php foreach ($cursos as $curso): ?>
+                    <option value="<?= $curso['id_curso'] ?>"><?= htmlspecialchars($curso['nombre']) ?></option>
+                <?php endforeach; ?>
+            </select>
+
             <button type="submit">Asignar</button>
         </form>
 
-        <a href="paneldocente.php" class="btn">Volver al Panel</a>
+        <a href="docente.php" class="btn">Volver al Panel</a>
     </div>
 </body>
 </html>
