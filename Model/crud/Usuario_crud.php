@@ -126,8 +126,6 @@ public function obtenerUsuarioPorId($id) {
     return $resultado->fetch_assoc();
 }
 
-<<<<<<< HEAD
-=======
 public function actualizarPerfil($id_usuario, $nombre, $email) {
     $conexion = Conexion::obtenerConexion();
     $sql = "UPDATE usuarios SET nombre_usuario = ?, correo = ? WHERE id_usuario = ?";
@@ -205,7 +203,6 @@ public function eliminarUsuarioPorId($id){
         return false;
     }
 }
->>>>>>> 9fd7565 (feat: Implementar funcionalidades completas de seguridad)
     public function verificarExistencia($cedula, $correo) {
     $sql = "SELECT cedula, correo FROM usuarios WHERE cedula = ? OR correo = ?";
     $stmt = $this->conexion->prepare($sql);
