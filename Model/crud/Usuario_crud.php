@@ -161,7 +161,7 @@ public function eliminarUsuarioPorId($id){
         $stmt = $this->conexion->prepare($sql);
 
         if (!$stmt) {
-            error_log('Error al preparar la consulta: ' . $conexion->error);
+            error_log('Error al preparar la consulta: ' . $this->conexion->error);
             return false;
         }
 
