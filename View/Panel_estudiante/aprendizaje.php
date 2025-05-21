@@ -33,9 +33,10 @@ $nombre_estudiante = $_SESSION['nombre_usuario'];
             <i class="fas fa-arrow-left"></i> Volver al inicio
         </button>
 
-        <button class="btn" onclick="window.location.href='ver_desafios.php'">
-        <i class="fas fa-tasks"></i> Ver Desafíos Asignados
-    </button>
+    <button class="btn" onclick="window.location.href='../../Controller/Estudiante/DesafioController.php'">
+    <i class="fas fa-tasks"></i> Ver Desafíos Asignados
+</button>
+
 
     </div>
     <div class="language-box" style="border-left: 8px solid #20c997;">

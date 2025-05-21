@@ -11,19 +11,26 @@ class DesafioModel {
     }
 
     public function guardar(Desafio $desafio) {
-        $stmt = $this->conn->prepare("INSERT INTO desafios (titulo, descripcion, fecha_limite, id_curso, id_docente) VALUES (?, ?, ?, ?, ?)");
+    $titulo = $desafio->getTitulo();
+    $descripcion = $desafio->getDescripcion();
+    $fecha_limite = $desafio->getFechaLimite();
+    $id_curso = $desafio->getIdCurso();
+    $id_docente = $desafio->getIdDocente();
 
-        $stmt->bind_param(
-            "sssii",
-            $desafio->getTitulo(),
-            $desafio->getDescripcion(),
-            $desafio->getFechaLimite(),
-            $desafio->getIdCurso(),
-            $desafio->getIdDocente()
-        );
+    $stmt = $this->conn->prepare("INSERT INTO desafios (titulo, descripcion, fecha_limite, id_curso, id_docente) VALUES (?, ?, ?, ?, ?)");
 
-        return $stmt->execute();
-    }
+    $stmt->bind_param(
+        "sssii",
+        $titulo,
+        $descripcion,
+        $fecha_limite,
+        $id_curso,
+        $id_docente
+    );
+
+    return $stmt->execute();
+}
+
 
     public function obtenerPorDocente($id_docente) {
         $stmt = $this->conn->prepare("SELECT d.*, c.nombre AS nombre_curso FROM desafios d JOIN cursos c ON d.id_curso = c.id_curso WHERE d.id_docente = ?");

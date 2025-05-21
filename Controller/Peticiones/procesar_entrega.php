@@ -43,7 +43,7 @@ mysqli_stmt_bind_param($stmt, "iiss", $id_desafio, $id_estudiante, $contenido, $
 
 if (mysqli_stmt_execute($stmt)) {
     echo "Entrega registrada correctamente.";
-    echo "<br><a href='../../View/Panel_estudiante/ver_desafios.php'>Volver a desafíos</a>";
+    echo "<br><a href='../Estudiante/DesafioController.php'>Volver a desafíos</a>";
 } else {
     echo "Error al registrar la entrega: " . mysqli_error($conn);
 }

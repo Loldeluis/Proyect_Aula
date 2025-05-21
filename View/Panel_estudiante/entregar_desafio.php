@@ -24,6 +24,8 @@ if (!$id_desafio) {
 <head>
     <meta charset="UTF-8">
     <title>Entregar Desafío</title>
+     <link rel="stylesheet" href="../../View/CSS/asignarDesafio.css">
+
 </head>
 <body>
     <h2>Entregar Desafío</h2>
@@ -35,7 +37,7 @@ if (!$id_desafio) {
         <input type="file" name="archivo"><br><br>
         <button type="submit">Enviar</button>
     </form>
-    <a href="ver_desafios.php">
+    <a href="../../Controller/Estudiante/DesafioController.php">
     ← Volver
 </a>
 
