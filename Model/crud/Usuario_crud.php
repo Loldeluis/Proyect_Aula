@@ -109,7 +109,7 @@ public function iniciarSesion($email, $password) {
 }
 public function obtenerUsuarioPorId($id) {
     $conexion = Conexion::obtenerConexion();
-    $sql = "SELECT u.nombre_usuario, u.correo, u.cedula, u.rol, i.nombre AS institucion 
+    $sql = "SELECT u.nombre_usuario, u.correo, u.cedula, u.rol, u.clave, i.nombre AS institucion 
         FROM usuarios u 
         JOIN instituciones i ON u.id_institucion = i.id_institucion 
         WHERE u.id_usuario = ?";
@@ -126,6 +126,86 @@ public function obtenerUsuarioPorId($id) {
     return $resultado->fetch_assoc();
 }
 
+<<<<<<< HEAD
+=======
+public function actualizarPerfil($id_usuario, $nombre, $email) {
+    $conexion = Conexion::obtenerConexion();
+    $sql = "UPDATE usuarios SET nombre_usuario = ?, correo = ? WHERE id_usuario = ?";
+    $stmt = $conexion->prepare($sql);
+
+    if (!$stmt) {
+        error_log("Error en prepare: " . $conexion->error);
+        return false;
+    }
+
+    $stmt->bind_param("ssi", $nombre, $email, $id_usuario);
+    $resultado = $stmt->execute();
+    $stmt->close();
+    
+    return $resultado;
+}
+
+public function actualizarContrasena($id, $nuevaContrasenaHash) {
+    $id = (int)$id;
+    if ($id <= 0) {
+        error_log("ID inválido para actualizar contraseña: " . $id);
+        return false;
+    }
+
+    try {
+        $sql = "UPDATE usuarios SET clave = ? WHERE id_usuario = ?";
+        $stmt = $this->conexion->prepare($sql);
+
+        if (!$stmt) {
+            error_log("Error al preparar la consulta: " . $this->conexion->error);
+            return false;
+        }
+
+        $stmt->bind_param('si', $nuevaContrasenaHash, $id);
+        $resultado = $stmt->execute();
+        
+        if (!$resultado) {
+            error_log("Error al ejecutar la consulta: " . $stmt->error);
+            return false;
+        }
+
+        // Verificar si realmente se actualizó alguna fila
+        if ($stmt->affected_rows === 0) {
+            error_log("No se actualizó ninguna fila para el ID: " . $id);
+            return false;
+        }
+
+        return true;
+    } catch (Exception $e) {
+        error_log("Excepción al actualizar contraseña: " . $e->getMessage());
+        return false;
+    }
+}
+
+public function eliminarUsuarioPorId($id){
+    try {
+        $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+        $stmt = $this->conexion->prepare($sql);
+
+        if (!$stmt) {
+            error_log('Error al preparar la consulta: ' . $this->conexion->error);
+            return false;
+        }
+
+        $stmt->bind_param('i', $id); 
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log('Error al ejecutar la consulta: ' . $stmt->error);
+            return false;
+        }
+    } catch (Exception $e) {
+        error_log('Error al eliminar usuario: ' . $e->getMessage());
+        return false;
+    }
+}
+>>>>>>> 9fd7565 (feat: Implementar funcionalidades completas de seguridad)
     public function verificarExistencia($cedula, $correo) {
     $sql = "SELECT cedula, correo FROM usuarios WHERE cedula = ? OR correo = ?";
     $stmt = $this->conexion->prepare($sql);
