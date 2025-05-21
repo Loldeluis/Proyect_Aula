@@ -11,11 +11,12 @@ require_once __DIR__ . '/../../Model/Docente/CursoModel.php';
 $controller = new DesafioController();
 $id_docente = $_SESSION['usuario_id'];
 $mensaje = "";
+
 if (!class_exists('CursoModel')) {
     die('La clase CursoModel no fue encontrada. Revisa el archivo y su contenido.');
 }
 
-$cursos = (new CursoModel())->obtenerCursosPorDocente($id_docente); // Asegúrate de tener este método
+$cursos = (new CursoModel())->obtenerCursosPorDocente($id_docente);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = [
@@ -27,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     if ($controller->asignarDesafio($data)) {
-        $mensaje = "Desafío asignado exitosamente.";
+        $mensaje = "✅ Desafío asignado exitosamente.";
     } else {
-        $mensaje = "Error al asignar desafío.";
+        $mensaje = "❌ Error al asignar desafío.";
     }
 }
 ?>
@@ -69,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit">Asignar</button>
         </form>
 
+        <a href="../../Controller/Peticiones/desafios_crud.php" class="btn">Ver Desafíos</a>
         <a href="docente.php" class="btn">Volver al Panel</a>
     </div>
 </body>

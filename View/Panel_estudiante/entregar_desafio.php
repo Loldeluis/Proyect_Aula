@@ -29,7 +29,7 @@ if (!$id_desafio) {
     <h2>Entregar Desafío</h2>
     <form action="../../Controller/Peticiones/procesar_entrega.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id_desafio" value="<?php echo $id_desafio; ?>">
-                  <label for="contenido">Contenido de la entrega:</label><br><br>
+        <label for="contenido">Contenido de la entrega:</label><br><br>
             <textarea id="contenido" name="contenido" placeholder="Escribe tu respuesta..." rows="6" required></textarea>
         <label>Adjuntar archivo (opcional):</label><br><br>
         <input type="file" name="archivo"><br><br>

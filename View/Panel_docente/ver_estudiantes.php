@@ -11,7 +11,8 @@ if (!isset($nombre_docente) || !isset($estudiantes)) {
 <head>
     <meta charset="UTF-8">
     <title>Lista de Estudiantes</title>
-    <link rel="stylesheet" href="../../CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../../View/CSS/aprendizaje.css">
+
 </head>
 <body>
     <header>
