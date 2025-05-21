@@ -1,24 +1,9 @@
 <?php
-session_start();
-
-// Verifica que el usuario es docente
-if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
-    header('Location: login.html');
+// Evitar acceso directo a la vista
+if (!isset($nombre_docente) || !isset($estudiantes)) {
+    header('Location: ../../Controller/Docente/Ver_estudiantesController.php');
     exit();
 }
-require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';
-
-$nombre_docente = $_SESSION['nombre_usuario'];
-
-// Conexión a la base de datos
-$conexion = new ConexionBD();
-$conn = $conexion->conectar();
-
-
-
-// Consulta para obtener los estudiantes
-$sql = "SELECT id_usuario, nombre_usuario, correo, cedula, estado FROM usuarios WHERE rol = 'estudiante'";
-$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +11,12 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <title>Lista de Estudiantes</title>
-    <link rel="stylesheet" href="../CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../../CSS/aprendizaje.css">
 </head>
 <body>
     <header>
         <h2>Estudiantes Registrados</h2>
-        <p>Docente: <?php echo htmlspecialchars($nombre_docente); ?></p>
+        <p>Docente: <?= htmlspecialchars($nombre_docente) ?></p>
     </header>
 
     <div class="container">
@@ -43,25 +28,18 @@ $result = mysqli_query($conn, $sql);
                 <th>Correo</th>
                 <th>Estado</th>
             </tr>
-            <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+            <?php foreach ($estudiantes as $row) : ?>
                 <tr>
-                    <td><?php echo $row['id_usuario']; ?></td>
-                    <td><?php echo htmlspecialchars($row['nombre_usuario']); ?></td>
-                    <td><?php echo $row['cedula']; ?></td>
-                    <td><?php echo $row['correo']; ?></td>
-                    <td><?php echo $row['estado'] ? 'Activo' : 'Inactivo'; ?></td>
+                    <td><?= $row['id_usuario'] ?></td>
+                    <td><?= htmlspecialchars($row['nombre_usuario']) ?></td>
+                    <td><?= $row['cedula'] ?></td>
+                    <td><?= $row['correo'] ?></td>
+                    <td><?= $row['estado'] ? 'Activo' : 'Inactivo' ?></td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </table>
 
-        <button class="btn-back" onclick="window.location.href='docente.php'">
-            <i class="fas fa-arrow-left"></i> Volver
-        </button>
+        <button class="btn-back" onclick="window.location.href='../../View/Panel_docente/docente.php'">Volver</button>
     </div>
-
 </body>
 </html>
-
-<?php
-mysqli_close($conn);
-?>
