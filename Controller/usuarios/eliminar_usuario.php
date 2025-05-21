@@ -1,41 +1,48 @@
 <?php
 session_start();
-require_once '../../Model/entity/Conexion.php';
-require_once '../../Model/crud/Usuario_crud.php';
+header('Content-Type: application/json');
+$baseDir = dirname(dirname(__DIR__));
+require_once($baseDir . '/Model/entity/Conexion.php');
+require_once($baseDir . '/Model/crud/Usuario_crud.php');
 
-if (!isset($_SESSION['usuario_id'])) {
-    header('Location: ../../View/perfil.php?error=sin_sesion');
-    exit;
+$response = ['success' => false, 'message' => ''];
+
+try {
+    if (!isset($_SESSION['usuario_id'])) {
+        throw new Exception('Sesión no iniciada');
+    }
+
+    if (!isset($_POST['password']) || empty(trim($_POST['password']))) {
+        throw new Exception('Debes ingresar tu contraseña');
+    }
+
+    $usuario_id = $_SESSION['usuario_id'];
+    $password = trim($_POST['password']);
+
+    $crud = new Usuario_crud();
+    $usuario = $crud->obtenerUsuarioPorId($usuario_id);
+
+    if (!$usuario) {
+        throw new Exception('Usuario no encontrado');
+    }
+
+    if (!password_verify($password, $usuario['password'])) {
+        throw new Exception('Contraseña incorrecta');
+    }
+
+    $eliminado = $crud->eliminarUsuarioPorId($usuario_id);
+
+    if (!$eliminado) {
+        throw new Exception('No se pudo eliminar la cuenta');
+    }
+
+    session_destroy();
+
+    $response['success'] = true;
+    $response['message'] = 'Cuenta eliminada correctamente';
+} catch (Exception $e) {
+    $response['message'] = $e->getMessage();
 }
 
-if (!isset($_POST['password']) || empty(trim($_POST['password']))) {
-    header('Location: ../../View/perfil.php?error=contrasena_requerida');
-    exit;
-}
-
-$usuario_id = $_SESSION['usuario_id'];
-$password = trim($_POST['password']);
-
-$crud = new Usuario_crud();
-$usuario = $crud->obtenerUsuarioPorId($usuario_id);
-
-if (!$usuario) {
-    header('Location: ../../View/perfil.php?error=usuario_no_encontrado');
-    exit;
-}
-
-if (!password_verify($password, $usuario['clave'])) {
-    header('Location: ../../View/perfil.php?error=contrasena_incorrecta');
-    exit;
-}
-
-$eliminado = $crud->eliminarUsuarioPorId($usuario_id);
-
-if (!$eliminado) {
-    header('Location: ../../View/perfil.php?error=eliminacion_fallida');
-    exit;
-}
-
-session_destroy();
-header('Location: ../../View/despedida.php');
+echo json_encode($response);
 exit;
