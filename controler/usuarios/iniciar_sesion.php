@@ -17,18 +17,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $crud = new Usuario_crud();
         $usuario = $crud->iniciarSesion($email, $password);
 
+        if (!$usuario) {
+            throw new Exception("Correo o contraseña incorrectos.");
+        }
+
         // Guardar en sesión
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_nombre'] = $usuario['nombre'];
         $_SESSION['usuario_rol'] = $usuario['rol'];
 
-        header('Location: ' . BASE_URL . '/View/aprendizaje.php');
-        exit();
+        // Llamar al archivo que crea la tabla de ejercicios
+        require_once($baseDir . '/controler/usuarios/crear_tabla_ejercicios.php');
 
+        header('Location: ' . BASE_URL . '/view/aprendizaje.php');
+        exit();
     } catch (Exception $e) {
         $_SESSION['error_login'] = $e->getMessage();
         $_SESSION['form_login'] = $_POST;
-        header('Location: ' . BASE_URL . '/View/login.php');
+        header('Location: ' . BASE_URL . '/view/login.php');
         exit();
     }
 }

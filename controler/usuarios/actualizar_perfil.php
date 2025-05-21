@@ -1,5 +1,5 @@
 <?php
-define('BASE_URL', 'http://localhost/ProyectoAula/');
+define('BASE_URL', 'http://localhost/Proyect_Aula-main/');
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['email'])) {
     $baseDir = dirname(dirname(__DIR__));
@@ -16,14 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['ema
         $_SESSION['nombre_usuario'] = $nombre;
         $_SESSION['correo'] = $email;
         
-        header('Location: ' . BASE_URL . 'View/perfil.php?exito=1');
+        header('Location: ' . BASE_URL . 'view/perfil.php?exito=1');
         exit;
     } else {
-        header('Location: ' . BASE_URL . 'View/perfil.php?error=1');
+        header('Location: ' . BASE_URL . 'view/perfil.php?error=1');
         exit;
     }
 } else {
     
-    header('Location: ' . BASE_URL . 'View/perfil.php?error=1');
+    header('Location: ' . BASE_URL . 'view/perfil.php?error=1');
     exit;
 }

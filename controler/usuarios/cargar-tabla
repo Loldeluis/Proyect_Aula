@@ -1,0 +1,33 @@
+<?php
+require_once '../Model/entity/Conexion.php';
+
+// Supongamos que este código se ejecuta al registrar un usuario
+$conexion = new Conexion();
+
+// Datos del usuario que se está registrando
+$usuario_id = 123; // Esto debe ser dinámico según el usuario registrado
+$usuario_nombre = "juan_perez"; // Nombre sin espacios ni caracteres especiales
+
+// Crear tabla personalizada
+$tabla_ejercicios = "ejercicios_" . strtolower(str_replace(" ", "_", $usuario_nombre));
+
+$sql_create = "CREATE TABLE $tabla_ejercicios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    lenguaje ENUM('Java', 'HTML', 'Python') NOT NULL,
+    nivel VARCHAR(20) NOT NULL,
+    estado ENUM('espera', 'fallido', 'hecho') NOT NULL DEFAULT 'espera'
+)";
+$conexion->exec($sql_create);
+
+// Insertar los 30 ejercicios en la tabla recién creada
+$sql_insert = "INSERT INTO $tabla_ejercicios (lenguaje, nivel, estado) VALUES (?, ?, ?)";
+$stmt = $conexion->prepare($sql_insert);
+
+foreach (['Java', 'HTML', 'Python'] as $lenguaje) {
+    for ($i = 1; $i <= 30; $i++) {
+        $stmt->execute([$lenguaje, "Nivel-$i", "espera"]);
+    }
+}
+
+echo "✔️ Tabla $tabla_ejercicios creada y ejercicios asignados correctamente.";
+?>

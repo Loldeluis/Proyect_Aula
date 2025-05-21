@@ -6,7 +6,7 @@ require_once($baseDir . '/Model/crud/Usuario_crud.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['usuario_id'])) {
-        header('Location: ../View/login.php');
+        header('Location: ../view/login.php');
         exit;
     }
 
@@ -16,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirmar = $_POST['confirmar'] ?? '';
 
     if (empty($actual) || empty($nueva) || empty($confirmar)) {
-        header('Location: ' . BASE_URL . '/View/perfil.php?error=empty_password_fields');
+        header('Location: ' . BASE_URL . '/view/perfil.php?error=empty_password_fields');
         exit;
     }
 
     if ($nueva !== $confirmar) {
-        header('Location: ' . BASE_URL . '/View/perfil.php?error=password_mismatch');
+        header('Location: ' . BASE_URL . '/view/perfil.php?error=password_mismatch');
         exit;
     }
 
@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $crud->obtenerUsuarioPorId($usuario_id);
 
     if (!$usuario) {
-        header('Location: ' . BASE_URL . '/View/perfil.php?error=user_not_found');
+        header('Location: ' . BASE_URL . '/view/perfil.php?error=user_not_found');
         exit;
     }
 
     // Verificar la contraseña actual con password_verify
     if (!password_verify($actual, $usuario['password'])) {
-        header('Location: ' . BASE_URL . '/View/perfil.php?error=wrong_current_password');
+        header('Location: ' . BASE_URL . '/view/perfil.php?error=wrong_current_password');
         exit;
     }
 
@@ -46,12 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $actualizado = $crud->actualizarContrasena($usuario_id, $hashNueva);
 
     if ($actualizado) {
-        header('Location:' . BASE_URL . '/View/perfil.php?exito_password=1');
+        header('Location:' . BASE_URL . '/view/perfil.php?exito_password=1');
     } else {
-        header('Location: ' . BASE_URL . '/View/perfil.php?error=update_failed');
+        header('Location: ' . BASE_URL . '/view/perfil.php?error=update_failed');
     }
     exit;
 } else {
-    header('Location: ' . BASE_URL . '/View/perfil.php');
+    header('Location: ' . BASE_URL . '/view/perfil.php');
     exit;
 }
