@@ -55,7 +55,7 @@ mysqli_close($conn);
         <p>No hay entregas disponibles para calificar.</p>
     <?php else: ?>
         <?php foreach ($entregas as $entrega): ?>
-            <form method="post" action="../../Controller/Peticiones/guardar_calificacion.php" class="language-box" style="border-left: 8px solid #ffc107;">
+            <form method="post" action="../../Controller/Docente/GuardarCalificacionController.php" class="language-box" style="border-left: 8px solid #ffc107;">
                 <h3><?php echo htmlspecialchars($entrega['titulo_desafio']); ?></h3>
                 <p><strong>Estudiante:</strong> <?php echo htmlspecialchars($entrega['nombre_estudiante']); ?></p>
                 <p><strong>Entrega:</strong><br><?php echo nl2br(htmlspecialchars($entrega['contenido'])); ?></p>
@@ -82,7 +82,7 @@ mysqli_close($conn);
 
         <?php endforeach; ?>
     <?php endif; ?>
-    <button class="btn-back" onclick="location.href='docente.php'">
+    <button class="btn-back" onclick="location.href='../../View/Panel_docente/docente.php'">
         <i class="fas fa-arrow-left"></i> Volver
     </button>
 </div>

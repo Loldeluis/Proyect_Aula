@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/utilidades/bd/ConexionBD.php';
+require_once __DIR__ . '/../utilidades/bd/ConexionBD.php';
 
 class EntregaModel {
     private $conn;
