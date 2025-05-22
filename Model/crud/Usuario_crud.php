@@ -77,7 +77,7 @@ class Usuario_crud {
 }
 
 public function iniciarSesion($email, $password) {
-    $sql = "SELECT id_usuario, nombre_usuario, clave, rol FROM usuarios WHERE correo = ? AND estado = 1 LIMIT 1";
+    $sql = "SELECT id_usuario, nombre_usuario, clave, rol, cedula FROM usuarios WHERE correo = ? AND estado = 1 LIMIT 1";
     $stmt = $this->conexion->prepare($sql);
 
     if (!$stmt) {
@@ -100,16 +100,18 @@ public function iniciarSesion($email, $password) {
         throw new Exception("Contraseña incorrecta.");
     }
 
-    // Autenticación exitosa
+    // Autenticación exitosa: retornamos también la cedula
     return [
-        'id' => $usuario['id_usuario'],
-        'nombre' => $usuario['nombre_usuario'],
-        'rol' => $usuario['rol']
+        'id'      => $usuario['id_usuario'],
+        'nombre'  => $usuario['nombre_usuario'],
+        'rol'     => $usuario['rol'],
+        'cedula'  => $usuario['cedula']
     ];
 }
+
 public function obtenerUsuarioPorId($id) {
     $conexion = Conexion::obtenerConexion();
-    $sql = "SELECT u.nombre_usuario, u.correo, u.cedula, u.rol, i.nombre AS institucion 
+    $sql = "SELECT u.nombre_usuario, u.correo, u.cedula, u.rol, u.clave, i.nombre AS institucion 
         FROM usuarios u 
         JOIN instituciones i ON u.id_institucion = i.id_institucion 
         WHERE u.id_usuario = ?";
@@ -143,21 +145,46 @@ public function actualizarPerfil($id_usuario, $nombre, $email) {
     return $resultado;
 }
 
-public function actualizarContrasena($id_usuario, $hashNueva) {
-    $sql = "UPDATE usuarios SET password = ? WHERE id = ?";
-    $stmt = $this->conexion->prepare($sql);
-    if (!$stmt) {
-        return false; // error en prepare
+public function actualizarContrasena($id, $nuevaContrasenaHash) {
+    $id = (int)$id;
+    if ($id <= 0) {
+        error_log("ID inválido para actualizar contraseña: " . $id);
+        return false;
     }
-    $stmt->bind_param('si', $hashNueva, $id_usuario); // 's' para string, 'i' para int
-    $resultado = $stmt->execute();
-    $stmt->close();
-    return $resultado;
+
+    try {
+        $sql = "UPDATE usuarios SET clave = ? WHERE id_usuario = ?";
+        $stmt = $this->conexion->prepare($sql);
+
+        if (!$stmt) {
+            error_log("Error al preparar la consulta: " . $this->conexion->error);
+            return false;
+        }
+
+        $stmt->bind_param('si', $nuevaContrasenaHash, $id);
+        $resultado = $stmt->execute();
+        
+        if (!$resultado) {
+            error_log("Error al ejecutar la consulta: " . $stmt->error);
+            return false;
+        }
+
+        // Verificar si realmente se actualizó alguna fila
+        if ($stmt->affected_rows === 0) {
+            error_log("No se actualizó ninguna fila para el ID: " . $id);
+            return false;
+        }
+
+        return true;
+    } catch (Exception $e) {
+        error_log("Excepción al actualizar contraseña: " . $e->getMessage());
+        return false;
+    }
 }
 
 public function eliminarUsuarioPorId($id){
     try {
-        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
         $stmt = $this->conexion->prepare($sql);
 
         if (!$stmt) {

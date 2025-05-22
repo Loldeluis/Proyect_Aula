@@ -47,7 +47,6 @@ languages.forEach((lang) => {
     `;
 
   langBox.addEventListener("click", (e) => {
-    // Evita que se active al hacer clic en los botones de nivel
     if (!e.target.classList.contains("level-btn")) {
       document.querySelectorAll(".levels").forEach((level) => {
         level.style.display = "none";
@@ -62,26 +61,6 @@ languages.forEach((lang) => {
 });
 
 function startLevel(language, level) {
-  const langLower = language.toLowerCase();
-  let targetURL = "";
-
-  // Construye la ruta con base en el lenguaje y nivel
-  if (langLower === "html") {
-    targetURL = `html-curso${level}.html`;
-  } else if (langLower === "java") {
-    targetURL = `java-curso${level}.html`;
-  } else if (langLower === "python") {
-    targetURL = `python-curso${level}.html`;
-  } else {
-    Swal.fire({
-      title: "Nivel no disponible",
-      text: `No se encontró el curso para ${language} - Nivel ${level}.`,
-      icon: "warning",
-      confirmButtonText: "Entendido",
-    });
-    return;
-  }
-
   const messages = [
     `¡Excelente elección! Preparando ${language} - Nivel ${level}...`,
     `Cargando contenido de ${language} para el nivel ${level}`,
@@ -93,19 +72,21 @@ function startLevel(language, level) {
     title: "¡Comencemos!",
     text: randomMsg,
     icon: "success",
-    confirmButtonText: "Ir al curso",
+    confirmButtonText: "Continuar",
     confirmButtonColor: "var(--primary)",
     background: "white",
     backdrop: `
-      rgba(67, 97, 238, 0.4)
-      url("https://sweetalert2.github.io/images/nyan-cat.gif")
-      center top
-      no-repeat
-    `,
+            rgba(67, 97, 238, 0.4)
+            url("https://sweetalert2.github.io/images/nyan-cat.gif")
+            center top
+            no-repeat
+        `,
     timer: 3000,
     didClose: () => {
-      // Redirige una vez cierre el alert
-      window.location.href = targetURL;
+      // Redirige después de mostrar la alerta
+      const fileName = `${language.toLowerCase()}-curso${level}.php`;
+      const path = `../View/${fileName}`;
+      window.location.href = path;
     },
   });
 }

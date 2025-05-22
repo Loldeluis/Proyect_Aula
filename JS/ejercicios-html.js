@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const paginaActual = window.location.pathname;
   let inicio, fin;
 
-  if (paginaActual.includes("html-curso1.html")) {
+  if (paginaActual.includes("html-curso1.php")) {
     inicio = 1;
     fin = 10;
-  } else if (paginaActual.includes("html-curso2.html")) {
+  } else if (paginaActual.includes("html-curso2.php")) {
     inicio = 11;
     fin = 20;
-  } else if (paginaActual.includes("html-curso3.html")) {
+  } else if (paginaActual.includes("html-curso3.php")) {
     inicio = 21;
     fin = 30;
   } else {
@@ -48,15 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para cargar JSON y abrir el modal
   function cargarEjercicio(numero) {
-    const ruta = `http://localhost/Proyect_Aula-main/controler/Ejercicio_cargados/java-json/ejercicio_${numero}.json`;
+    const ruta = `http://localhost/ProyectoAula/Controller/Ejercicio_cargados/html-json/ejercicio_${numero}.json`;
 
     fetch(ruta)
       .then((res) => {
-        if (!res.ok) throw new Error(`Archivo ejercicio_${numero}.json no encontrado`);
+        if (!res.ok)
+          throw new Error(`Archivo ejercicio_${numero}.json no encontrado`);
         return res.json();
       })
       .then((data) => {
-        descripcion.textContent = data.descripcion || "Descripción no disponible.";
+        descripcion.textContent =
+          data.descripcion || "Descripción no disponible.";
         modal.classList.add("mostrar");
         inputNumeroEjercicio.value = numero;
       })

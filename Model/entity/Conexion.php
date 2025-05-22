@@ -1,5 +1,5 @@
 <?php 
-define('BASE_URL', 'http://localhost/Proyect_Aula-main');
+define('BASE_URL', 'http://localhost/ProyectoAula');
 class Conexion {
     private static $instancia = null;
     private $conexion;

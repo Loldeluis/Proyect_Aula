@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formSubida = document.getElementById("form-subida");
   const resultado = document.getElementById("resultado-evaluacion");
 
-  // Verificar que el archivo JavaScript está cargando correctamente
-  console.log("✅ Archivo ejercicios-java.js cargado correctamente");
+  console.log("✅ Archivo cargado correctamente");
 
   if (
     !contenedor ||
@@ -25,24 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Detectar en qué página estamos
   const paginaActual = window.location.pathname;
-  console.log("Página detectada:", paginaActual); // Para verificar qué página está siendo reconocida
-
   let inicio, fin;
-  if (paginaActual.includes("java-curso1.html")) {
+
+  if (paginaActual.includes("java-curso1.php")) {
     inicio = 1;
     fin = 10;
-  } else if (paginaActual.includes("java-curso2.html")) {
+  } else if (paginaActual.includes("java-curso2.php")) {
     inicio = 11;
     fin = 20;
-  } else if (paginaActual.includes("java-curso3.html")) {
+  } else if (paginaActual.includes("java-curso3.php")) {
     inicio = 21;
     fin = 30;
   } else {
     console.warn("⚠️ Página no reconocida. No se generarán botones.");
     return;
   }
-
-  console.log(`Generando botones desde ${inicio} hasta ${fin}`);
 
   // Generar botones dinámicamente
   for (let i = inicio; i <= fin; i++) {
@@ -54,17 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para cargar JSON y abrir el modal
   function cargarEjercicio(numero) {
-    const ruta = `http://localhost/Proyect_Aula-main/controler/Ejercicio_cargados/java-json/ejercicio_${numero}.json`;
+    const ruta = `http://localhost/ProyectoAula/Controller/Ejercicio_cargados/java-json/ejercicio_${numero}.json`;
 
     fetch(ruta)
       .then((res) => {
-        if (!res.ok)
-          throw new Error(`Archivo ejercicio_${numero}.json no encontrado`);
+        if (!res.ok) throw new Error(`Archivo ejercicio_${numero}.json no encontrado`);
         return res.json();
       })
       .then((data) => {
-        descripcion.textContent =
-          data.descripcion || "Descripción no disponible.";
+        descripcion.textContent = data.descripcion || "Descripción no disponible.";
         modal.classList.add("mostrar");
         inputNumeroEjercicio.value = numero;
       })
@@ -75,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // Cierra el modal
+  // Cerrar modal
   cerrarModal.addEventListener("click", () => {
     modal.classList.remove("mostrar");
     resultado.innerHTML = "";
