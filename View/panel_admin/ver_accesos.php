@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Historial de Accesos</title>
-<link rel="stylesheet" href="/Proyecto_aula/View/CSS/desafios_crud.css">
+<link rel="stylesheet" href="/Proyecto_aula/View/CSS/ver_ccesos.css">
 </head>
 <body>
     <h2 style="text-align:center;">Historial de Accesos</h2>

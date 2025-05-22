@@ -10,7 +10,7 @@ if (!isset($nombreEstudiante) || !isset($cursos)) {
 <head>
     <meta charset="UTF-8">
     <title>Inscribirse a un curso</title>
-    <link rel="stylesheet" href="../../View/CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../../View/CSS/docente.css">
 </head>
 <body>
     <header>

@@ -17,7 +17,7 @@ if ($_SESSION['rol'] != 'admin') {
 <head>
     <meta charset="UTF-8">
     <title>Registrar Usuario</title>
-    <link rel="stylesheet" href="../CSS/desafios_crud.css">
+    <link rel="stylesheet" href="../CSS/registrarAdmin.css">
 
 </head>
 <body>

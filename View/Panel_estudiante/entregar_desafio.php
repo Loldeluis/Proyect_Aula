@@ -24,7 +24,7 @@ if (!$id_desafio) {
 <head>
     <meta charset="UTF-8">
     <title>Entregar Desafío</title>
-     <link rel="stylesheet" href="../../View/CSS/asignarDesafio.css">
+     <link rel="stylesheet" href="../../View/CSS/entregar_desafio.css">
 
 </head>
 <body>

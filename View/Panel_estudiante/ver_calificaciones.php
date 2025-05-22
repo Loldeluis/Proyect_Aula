@@ -17,7 +17,7 @@ $calificaciones = $controller->verCalificaciones($_SESSION['usuario_id']);
 <head>
     <meta charset="UTF-8">
     <title>Mis Calificaciones</title>
-    <link rel="stylesheet" href="../CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../CSS/calificaciones.css">
     <link rel="stylesheet" href="../CSS/boton_flotante.css">
 </head>
 <body>

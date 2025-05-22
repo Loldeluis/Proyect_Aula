@@ -10,7 +10,7 @@ if (!isset($desafios)) {
 <head>
     <meta charset="UTF-8">
     <title>Mis Desafíos</title>
-    <link rel="stylesheet" href="../../View/CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../../View/CSS/ver_desafio.css">
     <style>
         .desafio-box {
             border-left: 8px solid #6f42c1;

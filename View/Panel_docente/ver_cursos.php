@@ -11,7 +11,7 @@ if (!isset($nombre_docente) || !isset($cursos)) {
 <head>
     <meta charset="UTF-8">
     <title>Mis Cursos</title>
-    <link rel="stylesheet" href="../../View/CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../../View/CSS/ver_cursos.css">
 </head>
 <body>
     <header>

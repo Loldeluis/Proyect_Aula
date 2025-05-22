@@ -14,7 +14,7 @@ $nombre_docente = $_SESSION['nombre_usuario'];
 <head>
     <meta charset="UTF-8">
     <title>Panel del Docente</title>
-    <link rel="stylesheet" href="../CSS/aprendizaje.css">
+    <link rel="stylesheet" href="../CSS/docente.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
