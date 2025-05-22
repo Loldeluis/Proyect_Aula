@@ -139,6 +139,7 @@ nav a:hover::after {
   margin-bottom: 1.5rem;
   background: linear-gradient(to right, var(--primary), var(--accent));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
