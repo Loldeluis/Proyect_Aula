@@ -10,8 +10,7 @@ if ($_SESSION['rol'] != 'admin') {
 <head>
     <meta charset="UTF-8">
     <title>Panel Admin</title>
-    <link rel="stylesheet" href="../../CSS/css_admin/panelAdmin.css">
-</head>
+    <link rel="stylesheet" href="../CSS/desafios_crud.css"></head>
 <body>
     <!-- Barra lateral -->
     <div class="sidebar">

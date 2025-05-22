@@ -5,6 +5,13 @@ if ($_SESSION['rol'] != 'admin') {
     exit();
 }
 ?>
+
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger">
+        <?php echo htmlspecialchars($_GET['error']); ?>
+    </div>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,7 +26,7 @@ if ($_SESSION['rol'] != 'admin') {
         <?php if (isset($_GET['error'])): ?>
             <div class="error"><?= htmlspecialchars($_GET['error']) ?></div>
         <?php endif; ?>
-        <form action="../datos.php" method="post">
+            <form action="../../Route/registrar_usuario.php" method="post">
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="text" name="cedula" placeholder="Cédula" required>
             <input type="email" name="email" placeholder="Email" required>
