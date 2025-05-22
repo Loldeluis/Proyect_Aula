@@ -20,4 +20,16 @@ class UsuarioController {
 
         return $this->model->registrar($usuario);
     }
+
+    public function obtenerUsuarios() {
+        return $this->model->obtenerUsuarios();
+    }
+
+    public function inactivarUsuario($id) {
+        return $this->model->inactivarUsuario($id);
+    }
+
+    public function editarUsuario($datos) {
+        return $this->model->editarUsuario($datos);
+    }
 }
