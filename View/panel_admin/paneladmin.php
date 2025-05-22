@@ -10,7 +10,7 @@ if ($_SESSION['rol'] != 'admin') {
 <head>
     <meta charset="UTF-8">
     <title>Panel Admin</title>
-    <link rel="stylesheet" href="../CSS/desafios_crud.css"></head>
+    <link rel="stylesheet" href="../CSS/panelAdmin.css"></head>
 <body>
     <!-- Barra lateral -->
     <div class="sidebar">
@@ -19,7 +19,7 @@ if ($_SESSION['rol'] != 'admin') {
             <ul>
                 <li><a href="registrar_usuario.php">➕ Registrar Usuario</a></li>
                 <li><a href="usuarios.php">👥 Ver Usuarios</a></li>
-                 <li><a href="ver_accesos.php">📊 Ver Accesos</a></li>
+                 <li><a href="../../acceso.php">📊 Ver Accesos</a></li>
                 <li><a href="../../Controller/Peticiones/logout.php">🚪 Cerrar Sesión</a></li>
 
 
