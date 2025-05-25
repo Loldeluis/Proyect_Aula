@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'estudiante') {
+if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'Estudiante') {
     header('Location: ../../login.html');
     exit();
 }

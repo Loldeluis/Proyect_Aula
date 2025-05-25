@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
-    header("Location: ../../login.html");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -27,10 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'id_docente' => $id_docente
     ];
 
-    if ($controller->asignarDesafio($data)) {
-        $mensaje = "✅ Desafío asignado exitosamente.";
+    // Validación de fecha
+    $fecha_limite = $data['fecha_limite'];
+    $hoy = date('Y-m-d');
+    if ($fecha_limite < $hoy) {
+        $mensaje = "❌ La fecha límite no puede ser menor a la fecha actual. Por favor, cámbiala.";
     } else {
-        $mensaje = "❌ Error al asignar desafío.";
+        if ($controller->asignarDesafio($data)) {
+            $mensaje = "✅ Desafío asignado exitosamente.";
+        } else {
+            $mensaje = "❌ Error al asignar desafío.";
+        }
     }
 }
 ?>
@@ -70,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit">Asignar</button>
         </form>
 
-        <a href="../../Controller/Peticiones/desafios_crud.php" class="btn">Ver Desafíos</a>
+        <a href="../../Model/crud/desafios_crud.php" class="btn">Ver Desafíos</a>
         <a href="docente.php" class="btn">Volver al Panel</a>
     </div>
 </body>

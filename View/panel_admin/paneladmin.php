@@ -19,7 +19,7 @@ if ($_SESSION['rol'] != 'admin') {
             <ul>
                 <li><a href="registrar_usuario.php">➕ Registrar Usuario</a></li>
                 <li><a href="usuarios.php">👥 Ver Usuarios</a></li>
-                 <li><a href="../../acceso.php">📊 Ver Accesos</a></li>
+                 <li><a href="acceso.php">📊 Ver Accesos</a></li>
                 <li><a href="../../Controller/Peticiones/logout.php">🚪 Cerrar Sesión</a></li>
 
 

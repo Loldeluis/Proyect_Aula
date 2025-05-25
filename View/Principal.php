@@ -5,7 +5,6 @@ if (isset($_SESSION['nombre_usuario'])) {
 } else {
     $usuario = null;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -27,18 +26,23 @@ if (isset($_SESSION['nombre_usuario'])) {
     <div class="auth-buttons">
       <?php if ($usuario): ?>
         <span style="color: white; margin-right: 10px;">
-          👋 Hola, <?php echo htmlspecialchars($usuario); ?>
+<a href="../Controller/Usuario/PerfilController.php?mostrar=<?= $_SESSION['usuario_id'] ?>" style="color: white; margin-right: 10px;">
+
+<i class="fas fa-user-circle" style="font-size: 2rem; color:rgb(245, 244, 243);"></i> Hola, <?= htmlspecialchars($usuario); ?>
+</a>
+
+
         </span>
         <a href="../Controller/Peticiones/logout.php" class="auth-btn logout-btn">
           <i class="fas fa-sign-out-alt"></i>
           <span>Cerrar sesión</span>
         </a>
       <?php else: ?>
-        <a href="login.html" class="auth-btn login-btn">
+        <a href="login.php" class="auth-btn login-btn">
           <i class="fas fa-sign-in-alt"></i>
           <span>Iniciar sesión</span>
         </a>
-        <a href="formularioinsertar.html" class="auth-btn register-btn">
+        <a href="formulario_registro.php" class="auth-btn register-btn">
           <i class="fas fa-user-plus"></i>
           <span>Registrarse</span>
         </a>
@@ -71,7 +75,7 @@ if (isset($_SESSION['nombre_usuario'])) {
           <h1>Domina el Arte de la Programación</h1>
           <p>Sumérgete en el mundo del desarrollo de software y adquiere las habilidades más demandadas de la industria tecnológica.</p>
           <img
-              src="../Media/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
+              src="img/2023-03-09-Quantas-linguagens-de-programacao-existem.jpg"
               alt="Lenguajes de programación"
               class="hero-img"
           />
@@ -166,5 +170,14 @@ if (isset($_SESSION['nombre_usuario'])) {
       </div>
   </footer>
   <script src="/JS/app.js" crossorigin="anonymous"></script>
+  <?php
+if (isset($_GET['msg']) && $_GET['msg'] === 'perfil_actualizado'): ?>
+<script>
+    if (!window.location.hash.includes('recargado')) {
+        window.location.hash = 'recargado';
+        window.location.reload(true);
+    }
+</script>
+<?php endif; ?>
   </body>
 </html>

@@ -33,9 +33,11 @@ if (!isset($nombreEstudiante) || !isset($cursos)) {
                 <?php endwhile; ?>
             </select>
             <button class="btn" type="submit">Inscribirse</button>
+            <a href="../../View/Panel_estudiante/ver_cursos_inscrito.php" class="btn">Ver mis cursos inscritos</a>
         </form>
 
         <button class="btn-back" onclick="window.location.href='../../View/Panel_estudiante/aprendizaje.php'">Volver</button>
+       
     </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'estudiante') {
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'Estudiante') {
     header('Location: login.html');
     exit();
 }

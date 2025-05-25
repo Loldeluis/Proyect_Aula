@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['nombre_usuario']) || $_SESSION['rol'] !== 'docente') {
-    header('Location: login.html');
+    header('Location: ../../login.php');
     exit();
 }
 require_once __DIR__ . '/../../Model/utilidades/bd/ConexionBD.php';

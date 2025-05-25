@@ -2,8 +2,7 @@
 <html>
 <head>
     <title>Historial de Accesos</title>
-<link rel="stylesheet" href="/Proyecto_aula/View/CSS/ver_ccesos.css">
-</head>
+<link rel="stylesheet" href="../CSS/ver_ccesos.css"></head>
 <body>
     <h2 style="text-align:center;">Historial de Accesos</h2>
 
@@ -20,7 +19,7 @@
         <?php if (!empty($accesos)): ?>
             <?php foreach ($accesos as $row): ?>
                 <tr>
-                    <td><?= htmlspecialchars($row['nombre_usuario']) ?></td>
+                    <td><?= htmlspecialchars($row['nombre_usuario']) ?></td>l
                     <td><?= htmlspecialchars($row['fecha_entrada']) ?></td>
                     <td><?= htmlspecialchars($row['fecha_salida'] ?? '---') ?></td>
                     <td><?= htmlspecialchars($row['estado_acceso']) ?></td>
@@ -31,8 +30,8 @@
         <?php endif; ?>
     </table>
 
-      <button class="btn-back" onclick="location.href='View/panel_admin/paneladmin.php'">
-        <i class="fas fa-arrow-left"></i> Volver
+    <button class="btn-back" onclick="location.href='paneladmin.php'">
+    <i class="fas fa-arrow-left"></i> Volver
     </button>
 </body>
 </html>

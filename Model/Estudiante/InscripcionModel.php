@@ -28,4 +28,21 @@ class InscripcionModel {
         mysqli_stmt_bind_param($stmt, "ii", $idEstudiante, $idCurso);
         return mysqli_stmt_execute($stmt);
     }
+
+    
+public function obtenerCursosPorEstudiante($idEstudiante) {
+    $sql = "SELECT c.* 
+            FROM cursos c
+            INNER JOIN estudiantes_cursos ec ON c.id_curso = ec.id_curso
+            WHERE ec.id_estudiante = ?";
+    $stmt = mysqli_prepare($this->conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $idEstudiante);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $cursos = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $cursos[] = $row;
+    }
+    return $cursos;
+}
 }

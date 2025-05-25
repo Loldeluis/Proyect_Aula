@@ -3,9 +3,7 @@ $baseDir = dirname(dirname(__DIR__));
 require_once($baseDir . '../Model/entity/Conexion.php');
 require_once($baseDir . '../Model/entity/Usuario.php');
 
-$_SESSION['error_registro'] = $mensaje;
-$_SESSION['campo_error'] = $campoError ?? null; 
-$_SESSION['form_data'] = $_POST;
+
 class Usuario_crud {
     private $conexion;
     public function __construct() {
@@ -135,6 +133,25 @@ public function iniciarSesion($email, $password) {
     return ['cedula' => $existeCedula, 'correo' => $existeCorreo];
 
     }
+public function eliminarUsuarioPorId($id){
+    $sql = "UPDATE usuarios SET estado = 0 WHERE id_usuario = ?";
+    $stmt = $this->conexion->prepare($sql);
+    if (!$stmt) return false;
+    $stmt->bind_param('i', $id);
+    return $stmt->execute();
+}
+
+public function obtenerUsuarioPorId($id) {
+    $sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+    $stmt = $this->conexion->prepare($sql);
+    if (!$stmt) {
+        throw new Exception("Error en prepare: " . $this->conexion->error);
+    }
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_assoc();
+}
     
 }
 
