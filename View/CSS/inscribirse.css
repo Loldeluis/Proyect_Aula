@@ -1,0 +1,88 @@
+/* Estilos para Inscribirse a un Curso */
+.container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+.container h2 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.container p {
+  margin-bottom: 1.5rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+}
+
+select {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.btn {
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(67, 97, 238, 0.4);
+}
+
+.btn-back {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 0.6rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: var(--primary);
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+}

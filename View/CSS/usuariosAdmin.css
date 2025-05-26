@@ -1,0 +1,101 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Fondo arcade */
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Encabezado vibrante */
+h1 {
+    text-align: center;
+    color: #00fff7;
+    text-shadow: 2px 2px #000;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+/* Tabla de usuarios */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,255,255,0.3);
+}
+
+/* Encabezados */
+th {
+    background-color: #0f3460;
+    color: #00fff7;
+    text-align: left;
+    padding: 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #00fff7;
+}
+
+/* Celdas */
+td {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+}
+
+/* Filas alternas */
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover */
+tr:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Botones de acción */
+button,
+a.btn {
+    padding: 8px 15px;
+    margin: 3px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff2e63;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover,
+a.btn:hover {
+    background-color: #e94560;
+    transform: scale(1.05);
+}
+
+/* Botón de volver */
+.btn-back {
+    display: inline-block;
+    margin: 30px auto 0;
+    background-color: #00fff7;
+    color: #000;
+    font-size: 1rem;
+    padding: 12px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00fff7;
+    transition: transform 0.2s ease;
+}
+
+.btn-back:hover {
+    transform: scale(1.08);
+    background-color: #00d5cc;
+}

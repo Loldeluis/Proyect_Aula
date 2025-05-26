@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php 
 define('BASE_URL', 'http://localhost/ProyectoAula');
 class Conexion {
@@ -8,6 +9,16 @@ class Conexion {
         $host = "localhost"; 
         $user = "root"; 
         $password = ""; 
+=======
+<?php
+class Conexion {
+    private static $instancia = null;
+    private $conexion;
+    private function __construct() {
+        $host = "localhost"; 
+        $user = "root"; 
+        $password = "root"; 
+>>>>>>> b.Luis
         $database = "bd_sistemaeducativo";
         
         $this->conexion = mysqli_connect($host, $user, $password, $database);

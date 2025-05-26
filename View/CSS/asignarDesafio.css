@@ -1,0 +1,119 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* Fondo principal */
+body {
+    background: linear-gradient(120deg, #1e3c72 0%, #2a5298 100%);
+    color: #222;
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 40px;
+    max-width: 500px;
+    width: 100%;
+    margin: 60px auto 0 auto;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    text-align: center;
+}
+
+/* Título */
+.container h1 {
+    font-size: 2.2rem;
+    color: #1e3c72;
+    margin-bottom: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Mensaje de resultado */
+.mensaje {
+    background: #e3fcec;
+    color: #256029;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border: 1px solid #b7ebc6;
+}
+
+/* Etiquetas */
+form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #1e3c72;
+}
+
+/* Inputs y textarea */
+form input[type="text"],
+form input[type="date"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #b0bec5;
+    font-size: 1rem;
+    background: #f7fafc;
+    color: #222;
+    transition: border-color 0.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #1e3c72;
+    background: #fff;
+}
+
+/* Botón enviar */
+form button[type="submit"] {
+    background-color: #1e3c72;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #1e3c7233;
+    transition: background 0.3s, transform 0.2s;
+}
+
+form button[type="submit"]:hover {
+    background: #2a5298;
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* Enlace volver */
+a.btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    background-color: #2a5298;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px #2a529833;
+    transition: background 0.3s, transform 0.2s;
+}
+
+a.btn:hover {
+    background-color: #1e3c72;
+    transform: translateY(-2px) scale(1.04);
+}

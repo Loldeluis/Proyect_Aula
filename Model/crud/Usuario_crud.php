@@ -3,9 +3,13 @@ $baseDir = dirname(dirname(__DIR__));
 require_once($baseDir . '../Model/entity/Conexion.php');
 require_once($baseDir . '../Model/entity/Usuario.php');
 
+<<<<<<< HEAD
 $_SESSION['error_registro'] = $mensaje ?? null;
 $_SESSION['campo_error'] = $campoError ?? null; 
 $_SESSION['form_data'] = $_POST;
+=======
+
+>>>>>>> b.Luis
 class Usuario_crud {
     private $conexion;
     public function __construct() {
@@ -107,6 +111,7 @@ public function iniciarSesion($email, $password) {
         'rol' => $usuario['rol']
     ];
 }
+<<<<<<< HEAD
 public function obtenerUsuarioPorId($id) {
     $conexion = Conexion::obtenerConexion();
     $sql = "SELECT u.nombre_usuario, u.correo, u.cedula, u.rol, i.nombre AS institucion 
@@ -178,6 +183,8 @@ public function eliminarUsuarioPorId($id){
         return false;
     }
 }
+=======
+>>>>>>> b.Luis
     public function verificarExistencia($cedula, $correo) {
     $sql = "SELECT cedula, correo FROM usuarios WHERE cedula = ? OR correo = ?";
     $stmt = $this->conexion->prepare($sql);
@@ -206,7 +213,31 @@ public function eliminarUsuarioPorId($id){
     return ['cedula' => $existeCedula, 'correo' => $existeCorreo];
 
     }
+<<<<<<< HEAD
     
     }
+=======
+public function eliminarUsuarioPorId($id){
+    $sql = "UPDATE usuarios SET estado = 0 WHERE id_usuario = ?";
+    $stmt = $this->conexion->prepare($sql);
+    if (!$stmt) return false;
+    $stmt->bind_param('i', $id);
+    return $stmt->execute();
+}
+
+public function obtenerUsuarioPorId($id) {
+    $sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+    $stmt = $this->conexion->prepare($sql);
+    if (!$stmt) {
+        throw new Exception("Error en prepare: " . $this->conexion->error);
+    }
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    return $resultado->fetch_assoc();
+}
+    
+}
+>>>>>>> b.Luis
 
 ?>
